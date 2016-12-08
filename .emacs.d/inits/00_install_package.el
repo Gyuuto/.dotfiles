@@ -7,6 +7,13 @@
     shell-command
     exec-path-from-shell
     auto-complete
+    company
+    company-irony
+    irony
+    ;auto-complete-c-headers
+    ;auto-complete-clang-async
+    ;function-args
+    ;flycheck
     ansi-color
     anything
     popwin

@@ -4,6 +4,8 @@
     nil '(
       ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
       )))
+
+;(fa-config-default)
 (add-hook 'c++-mode-hook
           '(lambda()
              (c-set-style "stroustrup")
@@ -19,3 +21,23 @@
 	     'c++-mode-hooks
              ))
 
+(require 'irony)
+(require 'company-irony)
+(eval-after-load "irony"
+  '(progn
+     (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+     (add-to-list 'company-backends 'company-irony)
+     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+     (add-hook 'c-mode-common-hook 'irony-mode)))
+
+;; (require 'flycheck)
+;; (flycheck-define-checker c/c++
+;;   "A C/C++ checker using g++."
+;;   :command ("g++" "-Wall" "-Wextra" source)
+;;   :error-patterns  ((error line-start
+;;                            (file-name) ":" line ":" column ":" " エラー: " (message)
+;;                            line-end)
+;;                     (warning line-start
+;;                            (file-name) ":" line ":" column ":" " 警告: " (message)
+;;                            line-end))
+;;   :modes (c-mode c++-mode))

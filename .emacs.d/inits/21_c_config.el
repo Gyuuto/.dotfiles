@@ -12,3 +12,6 @@
              (setq tab-width 4)
              (setq c-basic-offset tab-width)
              ))
+
+(require 'auto-complete-c-headers)
+(add-hook 'c-mode-hook '(setq ac-sources (append ac-sources '(ac-source-c-headers))))
