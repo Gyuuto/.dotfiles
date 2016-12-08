@@ -46,3 +46,23 @@
     (dired-various-sort-change dired-various-sort-type)))
 
 (setq dired-listing-switches "-alh")
+
+(defvar helm-c-source-dired-various-sort
+  '((name . "Dired various sort type")
+    (candidates . (lambda ()
+                    (mapcar (lambda (x)
+                              (cons (concat (cdr x) " (" (car x) ")") x))
+                            dired-various-sort-type)))
+    (action . (("Set sort type" . (lambda (candidate)
+                                    (dired-various-sort-change dired-various-sort-type candidate)))))
+    ))
+
+(add-hook 'dired-mode-hook
+          '(lambda ()
+             (define-key dired-mode-map "s" 'dired-various-sort-change-or-edit)
+             (define-key dired-mode-map "c"
+               '(lambda ()
+                  (interactive)
+                  (helm '(helm-c-source-dired-various-sort))))
+             ))
+
