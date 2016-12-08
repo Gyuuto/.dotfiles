@@ -2,32 +2,8 @@
 (require 'anything-startup)
 (global-set-key (kbd "C-x :") 'anything)
 
-(require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
-
 (when (eq system-type 'darwin)
   (setq ns-command-modifier (quote meta)))
-
-
-(defvar anything-c-source-dired-various-sort
-  '((name . "Dired various sort type")
-    (candidates . (lambda ()
-                    (mapcar (lambda (x)
-                              (cons (concat (cdr x) " (" (car x) ")") x))
-                            dired-various-sort-type)))
-    (action . (("Set sort type" . (lambda (candidate)
-                                    (dired-various-sort-change dired-various-sort-type candidate)))))
-    ))
-
-(add-hook 'dired-mode-hook
-          '(lambda ()
-             (define-key dired-mode-map "s" 'dired-various-sort-change-or-edit)
-             (define-key dired-mode-map "c"
-               '(lambda ()
-                  (interactive)
-                  (anything '(anything-c-source-dired-various-sort))))
-             ))
-
 
 (defun my-choose-completion ()
   "Choose the completion that point is in or next to."
