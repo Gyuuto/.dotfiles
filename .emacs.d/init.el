@@ -1,4 +1,4 @@
-(setq system_path (cond ((string= window-system "w32") "C:") ((eq 1 1) "~")) )
+(setq system_path "~");(cond ((string= window-system "w32") "C:") ((eq 1 1) "~")) )
 
 ;; read init.el of each host
 (setq init_host (concat system_path "/.dotfiles/.emacs.d/init_" (system-name) ".el"))
