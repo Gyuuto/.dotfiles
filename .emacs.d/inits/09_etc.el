@@ -46,3 +46,24 @@
   (setq shell-file-name explicit-shell-file-name)
   (add-to-list 'exec-path "C:/Program Files/Git/bin")
 )
+
+(add-hook 'shell-mode-hook
+          '(lambda ()
+             ;; zsh のヒストリファイル名を設定
+             (setq comint-input-ring-file-name "~/.zsh_history")
+             ;; ヒストリの最大数
+             (setq comint-input-ring-size 1024)
+             ;; 既存の zsh ヒストリファイルを読み込み
+             (comint-read-input-ring t)
+             ;; zsh like completion (history-beginning-search)
+             (local-set-key "\M-p" 'comint-previous-matching-input-from-input)
+             (local-set-key "\M-n" 'comint-next-matching-input-from-input)
+             ;; 色の設定
+	     (ansi-color-for-comint-mode-on)
+             )
+          )
+
+; Listing directory failed but access-file worked エラーの解消
+(when (eq system-type 'darwin)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program nil))
