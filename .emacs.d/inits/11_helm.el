@@ -11,6 +11,7 @@
 (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+(global-set-key (kbd "C-c h") 'helm-mini)
 
 ;; Disable helm in some functions
 (add-to-list 'helm-completing-read-handlers-alist '(find-alternate-file . nil))
