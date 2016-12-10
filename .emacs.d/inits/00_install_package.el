@@ -21,6 +21,7 @@
     helm-git-grep
     helm-gtags
     helm-ls-git
+    cmake-mode
     matlab-mode
     yatex
     magit
