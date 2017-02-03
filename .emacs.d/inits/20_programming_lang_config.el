@@ -10,6 +10,7 @@
       (append
        '(("\\.c$" . c-mode))
        '(("\\.h$" . c-mode))
+       '(("\\.cl$" . c-mode))
        '(("\\.cpp$" . c++-mode))
        '(("\\.glsl$" . c++-mode))
        '(("\\.cxx$" . c++-mode))
