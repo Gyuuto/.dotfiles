@@ -17,18 +17,8 @@
 ;=======================================================================
 ;フォント
 ;=======================================================================
-(when (eq window-system 'w32)
-  (set-face-attribute 'default nil
-                      :family "Consolas"
-		      :height 105)
-  (set-fontset-font nil 'japanese-jisx0208 (font-spec :family "メイリオ"))
-)
-(when (eq window-system 'ns)
-  (set-face-attribute 'default nil
-                      :family "Consolas"
-		      :height 125)
-  (set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Hiragino Kaku Gothic ProN"))
-)
+;; (add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
+(add-to-list 'default-frame-alist '(font . "consolas-12"))
 
 ;(cond ((string= window-system "w32")
 ;       (create-fontset-from-ascii-font
