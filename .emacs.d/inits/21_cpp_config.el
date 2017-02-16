@@ -41,3 +41,16 @@
 ;;                            (file-name) ":" line ":" column ":" " 警告: " (message)
 ;;                            line-end))
 ;;   :modes (c-mode c++-mode))
+
+;; テンプレート
+(require 'autoinsert)
+(cond ((string= window-system "w32")
+       (setq auto-insert-directory "C:/Users/Yuto Inoue/Desktop/Programming/")
+       )
+      ((eq 1 1)
+       (setq auto-insert-directory "~/Documents/Programming/")
+       )
+)
+(setq auto-insert-alist
+      (append  '( ("\\.cpp$" . "C++/template.cpp")
+                ) auto-insert-alist))
