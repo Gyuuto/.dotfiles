@@ -8,6 +8,7 @@
     cmake-mode
     matlab-mode
     markdown-mode
+    meghanada
     ;;; useful for programming
     smart-compile
     auto-complete
