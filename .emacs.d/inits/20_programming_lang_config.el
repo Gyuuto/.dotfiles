@@ -29,6 +29,7 @@
        '(("\\.php$" . web-mode))
        '(("\\.jsp$" . web-mode))
        '(("\\.js$" . web-mode)) 
+       '(("\\.ts$" . web-mode)) 
        '(("\\.jsx$" . web-mode)) 
        auto-mode-alist)
 )
