@@ -1,5 +1,8 @@
+(require 'meghanada)
 (add-hook 'java-mode-hook
           '(lambda()
+	     ;; meghanada-mode on
+	     (meghanada-mode t)
              (c-set-style "stroustrup")
              (setq indent-tabs-mode t) 
              (c-set-offset 'inline-open 0)
@@ -11,3 +14,5 @@
              (setq tab-width 4)
              (setq c-basic-offset tab-width)
              ))
+
+(push 'java-mode irony-supported-major-modes)
