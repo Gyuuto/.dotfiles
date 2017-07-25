@@ -82,3 +82,6 @@ export PATH="/home/yuto/anaconda2/bin:$PATH"
 
 # added by Anaconda3 4.3.0 installer
 export PATH="/home/yuto/anaconda3/bin:$PATH"
+
+# for amd gpu
+alias amd_status="aticonfig --odgt --odgc"
