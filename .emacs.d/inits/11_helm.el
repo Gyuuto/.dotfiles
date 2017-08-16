@@ -2,7 +2,7 @@
 (helm-mode 1)
 
 (define-key global-map (kbd "M-x") 'helm-M-x)
-;(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+(define-key global-map (kbd "C-x C-f") 'helm-find-files)
 (define-key global-map (kbd "C-x C-r") 'helm-recentf)
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
 (define-key global-map (kbd "C-c i")   'helm-imenu)
@@ -31,19 +31,19 @@
     ad-do-it))
 
 (setq helm-ff-fuzzy-matching nil)
-(defadvice helm-ff--transform-pattern-for-completion (around my-transform activate)
-  "Transform the pattern to reflect my intention"
-  (let* ((pattern (ad-get-arg 0))
-	 (input-pattern (file-name-nondirectory pattern))
-	 (dirname (file-name-directory pattern)))
-    (setq input-pattern (replace-regexp-in-string "\\." "\\\\." input-pattern))
-    (setq ad-return-value
-	  (concat dirname
-		  (if (string-match "^\\^" input-pattern)
-		      ;; '^' is a pattern for basename
-		      ;; and not required because the directory name is prepended
-		      (substring input-pattern 1)
-		    (concat ".*" input-pattern))))))
+;; (defadvice helm-ff--transform-pattern-for-completion (around my-transform activate)
+;;   "Transform the pattern to reflect my intention"
+;;   (let* ((pattern (ad-get-arg 0))
+;; 	 (input-pattern (file-name-nondirectory pattern))
+;; 	 (dirname (file-name-directory pattern)))
+;;     (setq input-pattern (replace-regexp-in-string "\\." "\\\\." input-pattern))
+;;     (setq ad-return-value
+;; 	  (concat dirname
+;; 		  (if (string-match "^\\^" input-pattern)
+;; 		      ;; '^' is a pattern for basename
+;; 		      ;; and not required because the directory name is prepended
+;; 		      (substring input-pattern 1)
+;; 		    (concat ".*" input-pattern))))))
 
 (defun helm-buffers-list-pattern-transformer (pattern)
   (if (equal pattern "")
