@@ -5,6 +5,8 @@
              (define-key c-mode-base-map "\C-m" 'newline-and-indent)
 	     ))
 
+(setq-default indent-tabs-mode nil)
+
 (setq auto-mode-alist
       ;;; 拡張子とモードの対応
       (append
