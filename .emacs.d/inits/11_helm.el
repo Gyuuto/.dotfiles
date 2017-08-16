@@ -30,20 +30,8 @@
   (when (file-exists-p candidate)
     ad-do-it))
 
-(setq helm-ff-fuzzy-matching nil)
-;; (defadvice helm-ff--transform-pattern-for-completion (around my-transform activate)
-;;   "Transform the pattern to reflect my intention"
-;;   (let* ((pattern (ad-get-arg 0))
-;; 	 (input-pattern (file-name-nondirectory pattern))
-;; 	 (dirname (file-name-directory pattern)))
-;;     (setq input-pattern (replace-regexp-in-string "\\." "\\\\." input-pattern))
-;;     (setq ad-return-value
-;; 	  (concat dirname
-;; 		  (if (string-match "^\\^" input-pattern)
-;; 		      ;; '^' is a pattern for basename
-;; 		      ;; and not required because the directory name is prepended
-;; 		      (substring input-pattern 1)
-;; 		    (concat ".*" input-pattern))))))
+(setq helm-mode-fuzzy-match t)
+(setq helm-completion-in-region-fuzzy-match t)
 
 (defun helm-buffers-list-pattern-transformer (pattern)
   (if (equal pattern "")
