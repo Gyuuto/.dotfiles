@@ -26,6 +26,7 @@
        '(("\\.tex$" . yatex-mode))
        '(("\\.m$" . matlab-mode))
        '(("\\.md$" . markdown-mode))
+       '(("\\.rs$" . rust-mode))
        auto-mode-alist)
 )
 

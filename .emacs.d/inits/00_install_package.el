@@ -23,6 +23,8 @@
     helm-ls-git
     cmake-mode
     matlab-mode
+    rust-mode
+    flycheck-rust
     yatex
     magit
     ))
