@@ -3,30 +3,34 @@
 (defvar installing-package-list
   '(
     ;; ここに使っているパッケージを書く。
+    ;;; mode
+    web-mode
+    cmake-mode
+    matlab-mode
+    markdown-mode
+    meghanada
+    rust-mode
+    flycheck-rust
+    ;;; useful for programming
     smart-compile
-    shell-command
-    exec-path-from-shell
     auto-complete
     company
     company-irony
     irony
-    ;auto-complete-c-headers
-    ;auto-complete-clang-async
-    ;function-args
-    ;flycheck
-    ansi-color
+    magit
+    ;;; shell ?
+    shell-command
+    exec-path-from-shell
+    ;;; useful for buffer
     anything
     popwin
     helm
     helm-git-grep
     helm-gtags
     helm-ls-git
-    cmake-mode
-    matlab-mode
-    rust-mode
-    flycheck-rust
+    ;;; etc
     yatex
-    magit
+    ansi-color
     ))
 
 (let ((not-installed (loop for x in installing-package-list

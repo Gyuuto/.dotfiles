@@ -59,7 +59,7 @@
     (concat "%b - emacs@" system-name))
 
 ;;時計を表示
-(display-time)
+;; (display-time)
 
 ;;; リージョンに色を付ける
 (setq transient-mark-mode t)
