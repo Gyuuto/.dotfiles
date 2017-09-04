@@ -1,4 +1,4 @@
-(setq system_path "~");(cond ((string= window-system "w32") "C:") ((eq 1 1) "~")) )
+(setq system_path "~")
 
 ;; read init.el of each host
 (setq init_host (concat system_path "/.dotfiles/.emacs.d/init_" (system-name) ".el"))
@@ -10,7 +10,7 @@
 (require 'package)
 (setq pakcage-user-dir (concat system_path "/.emacs.d/elisp/elpa"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
 
 

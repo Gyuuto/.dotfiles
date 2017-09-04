@@ -41,3 +41,10 @@
 ;;                            (file-name) ":" line ":" column ":" " 警告: " (message)
 ;;                            line-end))
 ;;   :modes (c-mode c++-mode))
+
+;; テンプレート
+(require 'autoinsert)
+(setq auto-insert-directory "~/Documents/Programming/C++")
+(setq auto-insert-alist
+      (append  '( ("\\.cpp$" . "template.cpp")
+		  ) auto-insert-alist))
