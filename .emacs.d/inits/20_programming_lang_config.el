@@ -38,4 +38,41 @@
 )
 
 (add-hook 'find-file-not-found-hooks 'auto-insert)
-;;
+
+(require 'highlight-symbol)
+(setq highlight-symbol-colors '("LightSeaGreen" "HotPink" "SlateBlue1" "DarkOrange" "SpringGreen1" "tan" "DodgerBlue1"))
+(setq highlight-symbol-idle-delay 1.0)
+(add-hook 'prog-mode-hook 'highlight-symbol-mode)
+(add-hook 'prog-mode-hook 'highlight-symbol-nav-mode)
+
+(require 'expand-region)
+(global-set-key (kbd "C-,") 'er/expand-region)
+
+;; enclosed selected region
+(defun region-to-single-quote ()
+  (interactive)
+  (quote-formater "'%s'" "^\\(\"\\).*" ".*\\(\"\\)$"))
+(defun region-to-double-quote ()
+  (interactive)
+  (quote-formater "\"%s\"" "^\\('\\).*" ".*\\('\\)$"))
+(defun region-to-bracket ()
+  (interactive)
+  (quote-formater "\(%s\)" "^\\(\\[\\).*" ".*\\(\\]\\)$"))
+(defun region-to-square-bracket ()
+  (interactive)
+  (quote-formater "\[%s\]" "^\\(\(\\).*" ".*\\(\)\\)$"))
+(defun quote-formater (quote-format re-prefix re-suffix)
+  (if mark-active
+      (let* ((region-text (buffer-substring-no-properties (region-beginning) (region-end)))
+             (replace-func (lambda (re target-text)(replace-regexp-in-string re "" target-text nil nil 1)))
+             (text (funcall replace-func re-suffix (funcall replace-func re-prefix region-text))))
+        (delete-region (region-beginning) (region-end))
+        (insert (format quote-format text)))
+    (error "Not Region selection")))
+
+(require 'region-bindings-mode)
+(region-bindings-mode-enable)
+(define-key region-bindings-mode-map (kbd "M-'") 'region-to-single-quote)
+(define-key region-bindings-mode-map (kbd "M-\"") 'region-to-double-quote)
+(define-key region-bindings-mode-map (kbd "M-9") 'region-to-bracket)
+(define-key region-bindings-mode-map (kbd "M-[") 'region-to-square-bracket)

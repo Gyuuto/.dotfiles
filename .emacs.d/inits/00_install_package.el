@@ -18,6 +18,9 @@
     company-irony
     irony
     magit
+    highlight-symbol
+    expand-region
+    region-bindings-mode
     ;;; shell ?
     shell-command
     exec-path-from-shell
