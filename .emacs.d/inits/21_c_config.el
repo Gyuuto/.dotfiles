@@ -2,7 +2,6 @@
 (add-hook 'c-mode-hook
           '(lambda()
              (c-set-style "stroustrup")
-             (setq indent-tabs-mode t) 
              (c-set-offset 'inline-open 0)
              (c-set-offset 'topmost-intro 0)
              (c-set-offset 'defun-block-intro '+)
@@ -15,3 +14,5 @@
 
 ;; (require 'auto-complete-c-headers)
 ;; (add-hook 'c-mode-hook '(setq ac-sources (append ac-sources '(ac-source-c-headers))))
+;(define-key c-mode-map [(tab)] 'company-complete)
+(add-to-list 'company-backends 'company-c-headers)
