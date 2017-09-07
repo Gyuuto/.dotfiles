@@ -9,7 +9,6 @@
 (add-hook 'c++-mode-hook
           '(lambda()
              (c-set-style "stroustrup")
-             (setq indent-tabs-mode t) 
              (c-set-offset 'inline-open 0)
              (c-set-offset 'topmost-intro 0)
              (c-set-offset 'defun-block-intro '+)
@@ -28,7 +27,8 @@
      (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
      (add-to-list 'company-backends 'company-irony)
      (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-     (add-hook 'c-mode-common-hook 'irony-mode)))
+     (add-hook 'c-mode-common-hook 'irony-mode)
+     ))
 
 ;; (require 'flycheck)
 ;; (flycheck-define-checker c/c++
