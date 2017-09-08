@@ -13,7 +13,6 @@
 (add-hook 'nxml-mode-hook
 	  '(lambda()
 	     (define-key nxml-mode-map "\r" 'newline-and-indent)
-	     (setq indent-tabs-mode t)
 	     (setq nxml-slash-auto-complete-flag t)
 	     (setq nxml-child-indent 4)
 	     (setq nxml-attribute-indent 4)

@@ -10,3 +10,10 @@
   (define-key company-search-map (kbd "C-p") 'company-select-previous)
   (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
 )
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+(when (string= window-system "w32")
+  (setq w32-pipe-read-delay 0)
+  )
+;;(setq company-backends (delete 'company-semantic company-backends))

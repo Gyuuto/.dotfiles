@@ -1,5 +1,8 @@
 (setq system_path "~")
 
+;; set default directory
+(setq default-directory (concat system_path "/"))
+
 ;; read init.el of each host
 (setq init_host (concat system_path "/.dotfiles/.emacs.d/init_" (system-name) ".el"))
 (if (file-exists-p init_host)
