@@ -7,26 +7,26 @@
 
 ;(fa-config-default)
 (add-hook 'c++-mode-hook
-          '(lambda()
-             (c-set-style "stroustrup")
-             (c-set-offset 'inline-open 0)
-             (c-set-offset 'topmost-intro 0)
-             (c-set-offset 'defun-block-intro '+)
-             (c-set-offset 'statement 0)
-             (c-set-offset 'statement-block-intro '+)
-             (c-toggle-hungry-state 1)
-             (setq tab-width 4)
-             (setq c-basic-offset tab-width)
-	     'c++-mode-hooks
-             ))
+          (lambda()
+            (c-set-style "stroustrup")
+            (c-set-offset 'inline-open 0)
+            (c-set-offset 'topmost-intro 0)
+            (c-set-offset 'defun-block-intro '+)
+            (c-set-offset 'statement 0)
+            (c-set-offset 'statement-block-intro '+)
+            (c-toggle-hungry-state 1)
+            (setq tab-width 4)
+            (setq c-basic-offset tab-width)
+            'c++-mode-hooks
+            ))
 
 (when (string= window-system "w32")
   (if (file-exists-p "~/.emacs.d/irony/irony-server.exe")
-      (progn'
+      (progn
        (require 'irony)
        (require 'company-irony)
        (eval-after-load "irony"
-         '(progn
+         (progn
             (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
             (add-to-list 'company-backends 'company-irony)
             (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)

@@ -16,4 +16,3 @@
 	    (set (make-variable-buffer-local 'company-minimum-prefix-length) 0)
 	    )
 	  )
-

@@ -1,9 +1,9 @@
 ;; 自動インデント機能
 (add-hook 'c-mode-common-hook
-          '(lambda ()
-             ;; RET キーで自動改行+インデント
-             (define-key c-mode-base-map "\C-m" 'newline-and-indent)
-	     ))
+          (lambda ()
+            ;; RET キーで自動改行+インデント
+            (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+            ))
 
 (setq-default indent-tabs-mode nil)
 
