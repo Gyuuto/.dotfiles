@@ -58,11 +58,11 @@
     ))
 
 (add-hook 'dired-mode-hook
-          '(lambda ()
-             (define-key dired-mode-map "s" 'dired-various-sort-change-or-edit)
-             (define-key dired-mode-map "c"
-               '(lambda ()
-                  (interactive)
-                  (helm '(helm-c-source-dired-various-sort))))
-             ))
+          (lambda ()
+            (define-key dired-mode-map "s" 'dired-various-sort-change-or-edit)
+            (define-key dired-mode-map "c"
+              (lambda ()
+                (interactive)
+                (helm '(helm-c-source-dired-various-sort))))
+            ))
 

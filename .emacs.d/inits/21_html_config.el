@@ -11,14 +11,14 @@
  '(mumamo-background-chunk-submode3 ((((class color) (min-colors 88) (background dark)) (:background "black"))))
  '(mumamo-background-chunk-submode4 ((((class color) (min-colors 88) (background dark)) (:background "black")))))
 (add-hook 'nxml-mode-hook
-	  '(lambda()
-	     (define-key nxml-mode-map "\r" 'newline-and-indent)
-	     (setq nxml-slash-auto-complete-flag t)
-	     (setq nxml-child-indent 4)
-	     (setq nxml-attribute-indent 4)
-	     (setq tab-width 4)
-	     (setq nxml-basic-offset tab-width)
-             ))
+	  (lambda()
+            (define-key nxml-mode-map "\r" 'newline-and-indent)
+            (setq nxml-slash-auto-complete-flag t)
+            (setq nxml-child-indent 4)
+            (setq nxml-attribute-indent 4)
+            (setq tab-width 4)
+            (setq nxml-basic-offset tab-width)
+            ))
 
 ;; yahtml-modeの設定
 (autoload 'yahtml-mode "yahtml" "Yet Another html mode" t)
