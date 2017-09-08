@@ -26,6 +26,7 @@
        '(("\\.m$" . matlab-mode))
        '(("\\.md$" . markdown-mode))
        '(("\\.html$" . web-mode)) 
+       '(("\\.jade$" . jade-mode)) 
        '(("\\.xml$" . web-mode))
        '(("\\.css$" . web-mode))
        '(("\\.php$" . web-mode))
