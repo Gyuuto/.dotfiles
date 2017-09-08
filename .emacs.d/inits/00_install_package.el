@@ -4,10 +4,12 @@
   '(
     ;; ここに使っているパッケージを書く。
     ;;; mode
+    jade-mode
     web-mode
     cmake-mode
     matlab-mode
     markdown-mode
+    yaml-mode
     meghanada
     ;;; useful for programming
     smart-compile
