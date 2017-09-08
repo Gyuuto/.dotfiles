@@ -2,7 +2,6 @@
 (autoload 'js-mode "js" nil t)
 (add-hook 'js-mode-hook
 	  '(lambda()
-	     (setq indent-tabs-mode t)
 	     (setq tab-width 4)
              (c-set-offset 'inline-open 0)
              (c-set-offset 'topmost-intro 0)

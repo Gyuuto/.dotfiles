@@ -11,7 +11,6 @@
 ;	     (add-to-list 'ac-sources 'ac-source-php-completion)
 ;	     (auto-complete-mode t))
              (c-set-style "stroustrup")
-             (setq indent-tabs-mode t) 
              (c-set-offset 'inline-open 0)
              (c-set-offset 'topmost-intro 0)
              (c-set-offset 'defun-block-intro '+)

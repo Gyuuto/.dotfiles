@@ -11,6 +11,8 @@
     markdown-mode
     yaml-mode
     meghanada
+    rust-mode
+    flycheck-rust
     ;;; useful for programming
     smart-compile
     auto-complete
@@ -18,6 +20,9 @@
     company-irony
     irony
     magit
+    highlight-symbol
+    expand-region
+    region-bindings-mode
     ;;; shell ?
     shell-command
     exec-path-from-shell
@@ -28,10 +33,6 @@
     helm-git-grep
     helm-gtags
     helm-ls-git
-    ;auto-complete-c-headers
-    ;auto-complete-clang-async
-    ;function-args
-    ;flycheck
     ;;; etc
     yatex
     ansi-color
