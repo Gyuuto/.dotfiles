@@ -32,4 +32,6 @@
      )
   )
 
+(require' irony)
+(require 'company-irony)
 (push 'java-mode irony-supported-major-modes)
