@@ -20,15 +20,22 @@
 	     'c++-mode-hooks
              ))
 
-(require 'irony)
-(require 'company-irony)
-(eval-after-load "irony"
-  '(progn
-     (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
-     (add-to-list 'company-backends 'company-irony)
-     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-     (add-hook 'c-mode-common-hook 'irony-mode)
-     ))
+(when (string= window-system "w32")
+  (if (file-exists-p "~/.emacs.d/irony/irony-server.exe")
+      (progn'
+       (require 'irony)
+       (require 'company-irony)
+       (eval-after-load "irony"
+         '(progn
+            (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+            (add-to-list 'company-backends 'company-irony)
+            (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+            (add-hook 'c-mode-common-hook 'irony-mode)
+            ))
+       )
+    (setq company-backends (delete 'company-clang company-backends))
+    )
+  )
 
 ;; (require 'flycheck)
 ;; (flycheck-define-checker c/c++
