@@ -18,7 +18,7 @@
 ;フォント
 ;=======================================================================
 ;; (add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
-(add-to-list 'default-frame-alist '(font . "consolas-12"))
+(add-to-list 'default-frame-alist '(font . "consolas-11"))
 
 ;(cond ((string= window-system "w32")
 ;       (create-fontset-from-ascii-font
