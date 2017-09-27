@@ -5,3 +5,10 @@
 
 (setq web-mode-auto-close-style 2)
 (setq web-mode-tag-auto-close-style 2)
+
+(add-hook 'web-mode-hook
+          (lambda()
+            (setq tab-width 4)
+            (setq indent-tabs-mode t)
+            )
+          )

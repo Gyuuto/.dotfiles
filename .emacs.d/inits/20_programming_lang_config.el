@@ -6,6 +6,7 @@
             ))
 
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 (setq auto-mode-alist
       ;;; 拡張子とモードの対応
