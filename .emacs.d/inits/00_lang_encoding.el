@@ -18,21 +18,13 @@
 ;フォント
 ;=======================================================================
 ;; (add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
-(add-to-list 'default-frame-alist '(font . "consolas-11"))
+(create-fontset-from-ascii-font "Consolas-11:weight=normal:slant=normal" nil "myfont")
+(set-fontset-font "fontset-myfont" 'ascii "Consolas-11:weight=normal:slant=normal" nil 'append)
+;(add-to-list 'default-frame-alist '(font . "Consolas-11"))
 
-;(cond ((string= window-system "w32")
-;       (create-fontset-from-ascii-font
-;	"-outline-メイリオ-normal-r-normal-normal-12-*-*-*-*-*-iso8859-1"
-;	nil "メイリオ")
-;      
-;       (create-fontset-from-ascii-font
-;	"-outline-メイリオ-normal-r-normal-normal-14-*-*-*-*-*-iso8859-1"
-;	nil "メイリオ")
-;       
-;       (set-fontset-font "fontset-メイリオ"
-;			 'japanese-jisx0208
-;			 '("メイリオ*" . "jisx0208-sjis"))
-;       (set-fontset-font "fontset-メイリオ"
-;			 'katakana-jisx0201
-;			 '("メイリオ*" . "jisx0201-katakana"))
-;))
+(when (string= window-system "w32")
+  (set-fontset-font "fontset-myfont" 'japanese-jisx0208 "メイリオ-10:weight=normal:slant=normal" nil 'append)
+  (set-fontset-font "fontset-myfont" 'japanese-jisx0212 "メイリオ-10:weight=normal:slant=normal" nil 'append)
+)
+
+(add-to-list 'default-frame-alist '(font . "fontset-myfont"))
