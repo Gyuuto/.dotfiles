@@ -34,9 +34,9 @@
     (flycheck-irony flycheck undo-tree markdown-mode magit font-lock+ dash-functional))))
 
 
+;; メニューバーを消す
+(menu-bar-mode 0)
 (when (not (eq window-system nil))
-  ;; メニューバーを消す
-  (menu-bar-mode 0)
   ;; ツールバーを消す
   (tool-bar-mode 0)
 )
