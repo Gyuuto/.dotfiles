@@ -6,6 +6,7 @@
     ;;; mode
     jade-mode
     web-mode
+    cuda-mode
     cmake-mode
     matlab-mode
     markdown-mode
@@ -23,6 +24,8 @@
     highlight-symbol
     expand-region
     region-bindings-mode
+    rtags
+    cmake-ide
     ;;; shell ?
     shell-command
     exec-path-from-shell

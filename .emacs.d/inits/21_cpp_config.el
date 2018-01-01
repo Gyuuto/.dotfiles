@@ -40,7 +40,7 @@
         (require 'company-irony)
         (eval-after-load "irony"
           '(progn
-             (custom-set-variables '(irony-additional-clang-options '("-std=c++11")))
+             (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
              (add-to-list 'company-backends 'company-irony)
              (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
              (add-hook 'c-mode-common-hook 'irony-mode)
@@ -68,3 +68,6 @@
 (setq auto-insert-alist
       (append '( ("\\.cpp$" . "template.cpp")
                  ) auto-insert-alist))
+
+(require 'rtags)
+(cmake-ide-setup)
