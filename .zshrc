@@ -14,17 +14,22 @@ source ~/.zplug/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-completions"
 zplug "chrissicool/zsh-256color"
+zplug "zplug/zplug", hook-build:"zplug --self-manage"
 
 zplug load --verbose
 zplug check || zplug install
 
 autoload -Uz promptinit
 promptinit
-prompt adam1
+prompt redhat
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[1;5D' emacs-backward-word
+bindkey ';5C' forward-word
+bindkey ';5D' backward-word
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000

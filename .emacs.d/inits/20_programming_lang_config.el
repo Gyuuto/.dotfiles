@@ -14,6 +14,7 @@
        '(("\\.c$" . c-mode))
        '(("\\.h$" . c-mode))
        '(("\\.cl$" . c-mode))
+       '(("\\.cu$" . cuda-mode))
        '(("\\.cpp$" . c++-mode))
        '(("\\.glsl$" . c++-mode))
        '(("\\.cxx$" . c++-mode))
