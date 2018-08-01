@@ -26,6 +26,7 @@
     region-bindings-mode
     rtags
     cmake-ide
+    rainbow-delimiters
     ;;; shell ?
     shell-command
     exec-path-from-shell
