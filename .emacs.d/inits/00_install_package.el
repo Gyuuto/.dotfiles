@@ -13,7 +13,6 @@
     yaml-mode
     meghanada
     rust-mode
-    flycheck-rust
     ;;; useful for programming
     smart-compile
     auto-complete
@@ -27,6 +26,9 @@
     rtags
     cmake-ide
     rainbow-delimiters
+    flycheck
+    flycheck-rust
+    flycheck-irony
     ;;; shell ?
     shell-command
     exec-path-from-shell
