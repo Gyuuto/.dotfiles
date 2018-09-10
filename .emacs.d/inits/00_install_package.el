@@ -29,11 +29,12 @@
     flycheck
     flycheck-rust
     flycheck-irony
+    racer
     ;;; shell ?
     shell-command
     exec-path-from-shell
     ;;; useful for buffer
-    anything
+    ;; anything
     popwin
     helm
     helm-git-grep

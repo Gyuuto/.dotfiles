@@ -7,7 +7,10 @@
 	  (lambda () (racer-mode) (flycheck-rust-setup))
 	  )
 
+(add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook  #'eldoc-mode)
+
+;; (add-hook 'racer-mode-hook #'company-mode)
 
 (add-hook 'racer-mode-hook
 	  (lambda ()
