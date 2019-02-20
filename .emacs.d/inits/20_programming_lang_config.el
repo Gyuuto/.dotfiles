@@ -12,7 +12,7 @@
       ;;; 拡張子とモードの対応
       (append
        '(("\\.c$" . c-mode))
-       '(("\\.h$" . c-mode))
+       '(("\\.h$" . c++-mode))
        '(("\\.cl$" . c-mode))
        '(("\\.cu$" . cuda-mode))
        '(("\\.cpp$" . c++-mode))
