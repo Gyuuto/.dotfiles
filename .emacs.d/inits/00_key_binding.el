@@ -7,10 +7,11 @@
 
 ;; undo
 (global-set-key "\C-z" 'undo)
+(global-set-key (kbd "C-_") nil)
 
 ;; change keymap of BS to C-h
 (keyboard-translate ?\C-h ?\C-?)
-(global-set-key "\C-h" nil)
+(global-unset-key "\C-h")
 
 ;; uncomment lines
 (define-key global-map "\C-c\C-v" 'uncomment-region)
