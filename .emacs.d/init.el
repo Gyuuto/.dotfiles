@@ -12,6 +12,7 @@
 ;; add package (melpa, maramalade)
 (require 'package)
 (setq pakcage-user-dir (concat system_path "/.emacs.d/elisp/elpa"))
+;(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
