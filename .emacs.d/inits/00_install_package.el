@@ -17,8 +17,12 @@
     smart-compile
     auto-complete
     company
-    company-irony
+    ;; company-irony
     irony
+    lsp-mode
+    lsp-ui
+    company-lsp
+    cquery
     magit
     highlight-symbol
     expand-region

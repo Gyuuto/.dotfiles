@@ -33,22 +33,49 @@
             'c++-mode-hooks
             ))
 
-(setq irony_bin (if (string= window-system "w32") "irony-server.exe" "irony-server"))
-(if (file-exists-p (concat "~/.emacs.d/irony/bin/" irony_bin))
+;; (setq irony_bin (if (string= window-system "w32") "irony-server.exe" "irony-server"))
+;; (if (file-exists-p (concat "~/.emacs.d/irony/bin/" irony_bin))
+;;     (progn
+;;       (require 'irony)
+;;       (require 'company-irony)
+;;       (eval-after-load "irony"
+;;         '(progn
+;;            (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
+;;            (add-to-list 'company-backends 'company-irony)
+;;            (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;;            (add-hook 'c-mode-common-hook 'irony-mode)
+;;            ))
+;;       (eval-after-load 'company
+;;         '(progn
+;;            (add-to-list 'company-backends 'company-irony-other)
+;;            (add-to-list 'company-backends 'company-irony)
+;;            ))
+;;       )
+;;   (setq company-backends (delete 'company-clang company-backends))
+;;   (add-to-list 'company-backends 'company-irony)
+;;   )
+
+;;; config cquery 
+(setq cquery_bin (if (string= window-system "w32") "~/.emacs.d/cquery/bin/cquery.exe" "~/.emacs.d/cquery/bin/cquery"))
+(if (file-exists-p cquery_bin)
     (progn
-      (require 'irony)
-      (require 'company-irony)
-      (eval-after-load "irony"
+      (require 'cquery)
+      (setq cquery-executable cquery_bin)
+      (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
+      (eval-after-load 'cquery
         '(progn
-           (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
-           (add-to-list 'company-backends 'company-irony)
-           (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-           (add-hook 'c-mode-common-hook 'irony-mode)
+           (add-to-list 'company-backends 'company-lsp)
+           (add-hook 'c-mode-common-hook 'lsp)
+           )
+        )
+      (require 'lsp-ui)
+      (eval-after-load 'lsp-ui
+        '(progn
+           (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+           (setq lsp-ui-sideline-enable nil)
+           (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info)
            ))
-      )
-  (setq company-backends (delete 'company-clang company-backends))
-  (add-to-list 'company-backends 'company-irony)
-  )
+      ))
 
 ;; (require 'flycheck)
 ;; (flycheck-define-checker c/c++
@@ -71,4 +98,3 @@
 
 (require 'rtags)
 (cmake-ide-setup)
-
