@@ -17,6 +17,7 @@
     smart-compile
     auto-complete
     company
+    company-irony
     irony
     lsp-mode
     lsp-ui
