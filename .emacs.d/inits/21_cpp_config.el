@@ -96,5 +96,5 @@
       (append '( ("\\.cpp$" . "template.cpp")
                  ) auto-insert-alist))
 
-(require 'rtags)
-(cmake-ide-setup)
+;; (require 'rtags)
+;; (cmake-ide-setup)
