@@ -72,7 +72,6 @@
       (eval-after-load 'lsp-ui
         '(progn
            (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-           (setq lsp-ui-sideline-enable nil)
            (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info)
            ))
       ))
