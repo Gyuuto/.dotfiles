@@ -17,17 +17,16 @@
     smart-compile
     auto-complete
     company
-    ;; company-irony
     irony
     lsp-mode
     lsp-ui
+    helm-xref
     company-lsp
     cquery
     magit
     highlight-symbol
     expand-region
     region-bindings-mode
-    rtags
     cmake-ide
     rainbow-delimiters
     flycheck
@@ -38,7 +37,6 @@
     shell-command
     exec-path-from-shell
     ;;; useful for buffer
-    ;; anything
     popwin
     helm
     helm-git-grep

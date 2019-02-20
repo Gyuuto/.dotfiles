@@ -56,3 +56,6 @@
 	     '(pattern-transformer helm-buffers-list-pattern-transformer)
 	     )
 
+
+(require 'helm-xref)
+(setq xref-show-xrefs-function 'helm-xref-show-xrefs)
