@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -d ./cquery ]; then
+if [ ! -d ./cquery ]; then
     git clone --recursive https://github.com/cquery-project/cquery.git
 fi
 
