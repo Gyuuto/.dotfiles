@@ -33,6 +33,7 @@
     flycheck
     flycheck-rust
     flycheck-irony
+    flycheck-popup-tip
     racer
     ;;; shell ?
     shell-command
