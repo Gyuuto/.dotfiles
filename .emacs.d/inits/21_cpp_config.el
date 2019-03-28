@@ -33,30 +33,9 @@
             'c++-mode-hooks
             ))
 
-;; (setq irony_bin (if (string= window-system "w32") "irony-server.exe" "irony-server"))
-;; (if (file-exists-p (concat "~/.emacs.d/irony/bin/" irony_bin))
-;;     (progn
-;;       (require 'irony)
-;;       (require 'company-irony)
-;;       (eval-after-load "irony"
-;;         '(progn
-;;            (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
-;;            (add-to-list 'company-backends 'company-irony)
-;;            (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;;            (add-hook 'c-mode-common-hook 'irony-mode)
-;;            ))
-;;       (eval-after-load 'company
-;;         '(progn
-;;            (add-to-list 'company-backends 'company-irony-other)
-;;            (add-to-list 'company-backends 'company-irony)
-;;            ))
-;;       )
-;;   (setq company-backends (delete 'company-clang company-backends))
-;;   (add-to-list 'company-backends 'company-irony)
-;;   )
-
-;;; config cquery 
+;;; config cquery when cquery binary exists otherwise config company-irony
 (setq cquery_bin (if (string= window-system "w32") "~/.emacs.d/cquery/bin/cquery.exe" "~/.emacs.d/cquery/bin/cquery"))
+(setq irony_bin (if (string= window-system "w32") "~/.emacs.d/irony/bin/irony-server.exe" "~/.emacs.d/irony/bin/irony-server"))
 (if (file-exists-p cquery_bin)
     (progn
       (require 'cquery)
@@ -74,7 +53,27 @@
            (add-hook 'lsp-mode-hook 'lsp-ui-mode)
            (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info)
            ))
-      ))
+      )
+  (if (file-exists-p (concat irony_bin))
+    (progn
+      (require 'irony)
+      (require 'company-irony)
+      (eval-after-load "irony"
+        '(progn
+           (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
+           (add-to-list 'company-backends 'company-irony)
+           (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+           (add-hook 'c-mode-common-hook 'irony-mode)
+           ))
+      (eval-after-load 'company
+        '(progn
+           (add-to-list 'company-backends 'company-irony-other)
+           (add-to-list 'company-backends 'company-irony)
+           ))
+      )
+  (setq company-backends (delete 'company-clang company-backends))
+  (add-to-list 'company-backends 'company-irony)
+  ))
 
 (require 'flycheck)
 (flycheck-define-checker c/c++
