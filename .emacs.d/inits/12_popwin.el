@@ -1,8 +1,9 @@
+(require 'popwin)
+(popwin-mode 1)
+
 (setq pop-up-windows nil)
-(require 'popwin nil t)
-(when (require 'popwin nil t)
+(when (require 'popwin)
   (setq anything-samewindow nil)
-  (setq display-buffer-function 'popwin:display-buffer)
   (push '("anything" :regexp t :height 0.5) popwin:special-display-config)
   (push '("helm" :regexp t :height 0.5) popwin:special-display-config)
   (push '("helm-mini" :regexp t :height 0.5) popwin:special-display-config)
@@ -12,4 +13,3 @@
   (push '("*YaTeX-typesetting*" :height 0.4 :noselect t :stick t) popwin:special-display-config)
   (push '("*dvi-printing*" :height 0.4 :noselect t :stick t) popwin:special-display-config)
   )
-
