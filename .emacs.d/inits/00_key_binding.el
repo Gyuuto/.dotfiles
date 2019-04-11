@@ -35,3 +35,7 @@
 
 ;; magit shortcut
 (global-set-key (kbd "C-x g") 'magit-status)
+
+;; redefine xref-find-apropos
+(global-unset-key (kbd "C-M-."))
+(global-set-key (kbd "C-M-_") 'xref-find-apropos)
