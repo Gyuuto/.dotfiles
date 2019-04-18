@@ -59,3 +59,6 @@
 
 (require 'helm-xref)
 (setq xref-show-xrefs-function 'helm-xref-show-xrefs)
+
+(require 'helm-swoop)
+(global-set-key "\C-x/" 'helm-swoop)

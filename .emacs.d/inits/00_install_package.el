@@ -41,6 +41,7 @@
     ;;; useful for buffer
     popwin
     helm
+    helm-swoop
     helm-git-grep
     helm-gtags
     helm-ls-git
