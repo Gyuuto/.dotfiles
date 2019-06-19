@@ -37,6 +37,7 @@
        '(("\\.js$" . web-mode)) 
        '(("\\.ts$" . web-mode)) 
        '(("\\.jsx$" . web-mode)) 
+       '(("\\.py$" . python-mode))
        auto-mode-alist)
 )
 
