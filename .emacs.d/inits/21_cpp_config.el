@@ -53,6 +53,7 @@
         '(progn
            (add-hook 'lsp-mode-hook 'lsp-ui-mode)
            (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
+           (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
            ))
       )
   (if (file-exists-p (concat irony_bin))
