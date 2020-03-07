@@ -1,5 +1,5 @@
 ;;; path
-(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
+(add-to-list 'exec-path (expand-file-name "'~/.cargo/bin'"))
 
 (eval-after-load "rust-mode"
   '(setq-default rust-format-on-save t))
@@ -19,3 +19,10 @@
 	    (set (make-variable-buffer-local 'company-minimum-prefix-length) 0)
 	    )
 	  )
+
+;; テンプレート
+(require 'autoinsert)
+(setq auto-insert-directory "~/Documents/Programming/Rust")
+(setq auto-insert-alist
+      (append '( ("\\.rs$" . "template.rs")
+                 ) auto-insert-alist))
