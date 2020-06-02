@@ -34,14 +34,15 @@
             ))
 
 ;;; config cquery when cquery binary exists otherwise config company-irony
-(setq cquery_bin (if (string= window-system "w32") "~/.emacs.d/cquery/bin/cquery.exe" "~/.emacs.d/cquery/bin/cquery"))
+;; (setq cquery_bin (if (string= window-system "w32") "~/.emacs.d/cquery/bin/cquery.exe" "~/.emacs.d/cquery/bin/cquery"))
+(setq ccls_bin (if (string= window-system "w32") "~/.emacs.d/ccls/bin/ccls.exe" "~/.emacs.d/ccls/bin/ccls"))
 (setq irony_bin (if (string= window-system "w32") "~/.emacs.d/irony/bin/irony-server.exe" "~/.emacs.d/irony/bin/irony-server"))
-(if (file-exists-p cquery_bin)
+(if (file-exists-p ccls_bin)
     (progn
-      (require 'cquery)
-      (setq cquery-executable cquery_bin)
-      (setq cquery-extra-init-params '(:completion (:detailedLabel t)))
-      (eval-after-load 'cquery
+      (require 'ccls)
+      (setq ccls-executable ccls_bin)
+      (setq ccls-extra-init-params '(:completion (:detailedLabel t)))
+      (eval-after-load 'ccls
         '(progn
            (add-to-list 'company-backends 'company-lsp)
            (add-hook 'c-mode-common-hook 'lsp)

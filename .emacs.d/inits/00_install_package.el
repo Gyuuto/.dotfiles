@@ -23,7 +23,8 @@
     lsp-ui
     helm-xref
     company-lsp
-    cquery
+    ;;cquery
+    ccls
     magit
     highlight-symbol
     expand-region
