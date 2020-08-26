@@ -62,3 +62,7 @@
 
 (require 'helm-swoop)
 (global-set-key "\C-x/" 'helm-swoop)
+
+;; change keybind for mark rings
+(global-unset-key (kbd "C-x c C-c SPC"))
+(global-set-key (kbd "C-x C-x") 'helm-all-mark-rings)
