@@ -39,3 +39,6 @@
 ;; ;; redefine xref-find-apropos
 ;; (global-unset-key (kbd "C-M-."))
 ;; (global-set-key (kbd "C-M-_") 'xref-find-apropos)
+
+;; define ace-window
+(global-set-key (kbd "C-q") 'ace-window)

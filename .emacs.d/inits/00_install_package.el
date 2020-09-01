@@ -46,6 +46,7 @@
     helm-git-grep
     helm-gtags
     helm-ls-git
+    ace-window
     ;;; etc
     yatex
     ansi-color
