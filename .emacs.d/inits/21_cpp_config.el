@@ -30,6 +30,7 @@
             (c-toggle-hungry-state 1)
             (setq tab-width 4)
             (setq c-basic-offset tab-width)
+            (yas-minor-mode)
             'c++-mode-hooks
             ))
 
@@ -42,18 +43,24 @@
       (require 'ccls)
       (setq ccls-executable ccls_bin)
       (setq ccls-extra-init-params '(:completion (:detailedLabel t)))
+      (setq lsp-prefer-capf t)
       (eval-after-load 'ccls
         '(progn
-           (add-to-list 'company-backends 'company-lsp)
            (add-hook 'c-mode-common-hook 'lsp)
            )
         )
+
       (require 'lsp-ui)
       (eval-after-load 'lsp-ui
         '(progn
            (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+           (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
+
            (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
            (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
+
+           (setq lsp-headerline-breadcrumb-segments '(symbols))
+
            ))
       )
   (if (file-exists-p (concat irony_bin))

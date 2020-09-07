@@ -22,7 +22,7 @@
     lsp-mode
     lsp-ui
     helm-xref
-    company-lsp
+    ;company-lsp
     ;;cquery
     ccls
     magit

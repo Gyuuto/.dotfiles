@@ -89,3 +89,8 @@
 (defun display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
+
+;; custom face for headerline
+(custom-set-faces
+ '(header-line ((t (:inherit mode-line :background "color-29" :inverse-video nil :underline t))))
+)
