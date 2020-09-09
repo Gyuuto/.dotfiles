@@ -50,17 +50,22 @@
            )
         )
 
+      (require 'lsp-mode)
+      (eval-after-load 'lsp-mode
+        '(progn
+           (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
+
+           (setq lsp-headerline-breadcrumb-segments '(symbols))
+           (setq lsp-enable-on-type-formatting nil)
+           ))
+
       (require 'lsp-ui)
       (eval-after-load 'lsp-ui
         '(progn
            (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-           (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
 
            (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
            (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
-
-           (setq lsp-headerline-breadcrumb-segments '(symbols))
-
            ))
       )
   (if (file-exists-p (concat irony_bin))
