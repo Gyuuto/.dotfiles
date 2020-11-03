@@ -16,7 +16,7 @@
 (setq ivy-truncate-lines nil)
 
 ;; set ivy buffer height
-(setq ivy-height 20)
+(setq ivy-height 30)
 
 ;; リスト先頭で `C-p' するとき，リストの最後に移動する
 (setq ivy-wrap t)
