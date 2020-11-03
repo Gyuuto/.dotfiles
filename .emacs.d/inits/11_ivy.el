@@ -38,3 +38,4 @@
 (define-key global-map (kbd "C-x b")   'counsel-switch-buffer)
 (define-key counsel-mode-map (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "C-c h") 'counsel-minibuffer-history)
+(global-set-key (kbd "C-x C-x") 'counsel-mark-ring)
