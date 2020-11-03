@@ -21,7 +21,6 @@
     irony
     lsp-mode
     lsp-ui
-    helm-xref
     ;company-lsp
     ;;cquery
     ccls
@@ -41,12 +40,20 @@
     exec-path-from-shell
     ;;; useful for buffer
     popwin
+    ace-window
+    ;;;; helm
     helm
     helm-swoop
     helm-git-grep
     helm-gtags
     helm-ls-git
-    ace-window
+    helm-xref
+    ;;;; ivy
+    ivy
+    ivy-xref
+    ivy-hydra
+    counsel
+    swiper
     ;;; etc
     yatex
     ansi-color
