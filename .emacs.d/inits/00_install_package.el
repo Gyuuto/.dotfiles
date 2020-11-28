@@ -54,6 +54,7 @@
     ivy-hydra
     counsel
     swiper
+    smex
     ;;; etc
     yatex
     ansi-color

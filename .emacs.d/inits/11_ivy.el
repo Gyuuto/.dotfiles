@@ -27,6 +27,24 @@
 (require 'counsel)
 (counsel-mode 1)
 
+;; M-x history
+(when (require 'smex nil t)
+  (setq smex-history-length 35)
+  (setq smex-completion-method 'ivy))
+
+(defun ivy--sort-by-len (name candidates)
+  "Sort CANDIDATES based on similarity of their length with NAME."
+  (let ((name-len (length name))
+        (candidates-count (length candidates)))
+    (if (< 500 candidates-count)
+        candidates
+      (seq-sort-by #'length
+                   (lambda (a b)
+                     (< (abs (- name-len a))
+                        (abs (- name-len b))))
+                   candidates))))
+(setf (alist-get 'counsel-M-x ivy-sort-matches-functions-alist) #'ivy--sort-by-len)
+
 (with-eval-after-load "magit"
   (setq magit-completing-read-function 'ivy-completing-read))
 
