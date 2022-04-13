@@ -36,7 +36,7 @@
     flycheck-popup-tip
     racer
     ;;; shell ?
-    shell-command
+    shell-command+
     exec-path-from-shell
     ;;; useful for buffer
     popwin

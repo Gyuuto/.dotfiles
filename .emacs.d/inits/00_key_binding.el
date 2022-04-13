@@ -22,9 +22,9 @@
 (require 'smart-compile)
 (define-key mode-specific-map "c" 'smart-compile)
 
-(require 'shell-command)
-(shell-command-completion-mode)
-(define-key mode-specific-map "\C-z" 'shell-command)
+;; (require 'shell-command)
+;; (shell-command-completion-mode)
+;; (define-key mode-specific-map "\C-z" 'shell-command)
 
 ;; move other buffer
 (defun other-window-or-split ()
