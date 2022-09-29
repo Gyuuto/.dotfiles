@@ -38,6 +38,7 @@
        '(("\\.ts$" . web-mode)) 
        '(("\\.jsx$" . web-mode)) 
        '(("\\.py$" . python-mode))
+       '(("\\.vue$" . vue-mode))
        auto-mode-alist)
 )
 

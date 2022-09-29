@@ -13,6 +13,8 @@
     yaml-mode
     meghanada
     rust-mode
+    vue-mode
+    typescript-mode
     ;;; useful for programming
     smart-compile
     auto-complete
