@@ -17,10 +17,10 @@
 ;=======================================================================
 ;フォント
 ;=======================================================================
-(add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
-(create-fontset-from-ascii-font "Consolas-11:weight=normal:slant=normal" nil "myfont")
-(set-fontset-font "fontset-myfont" 'ascii "rictydiminished-11:weight=normal:slant=normal" nil 'append)
-(add-to-list 'default-frame-alist '(font . "Consolas-11"))
+;; (add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
+;; (create-fontset-from-ascii-font "Consolas-11:weight=normal:slant=normal" nil "myfont")
+;; (set-fontset-font "fontset-myfont" 'ascii "rictydiminished-11:weight=normal:slant=normal" nil 'append)
+;; (add-to-list 'default-frame-alist '(font . "Consolas-11"))
 
 ;; (when (string= window-system "w32")
 ;;   (set-fontset-font "fontset-myfont" 'japanese-jisx0208 "メイリオ-10:weight=normal:slant=normal" nil 'append)
