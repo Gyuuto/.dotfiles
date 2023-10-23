@@ -103,6 +103,9 @@
 ;;                               ;; (setq lsp-ui-peek-list-width (/ (window-pixel-width) 2))
 ;;                               (lsp-ui-peek-find-references)))
 
+;; (global-set-key (kbd "C-c C-SPC") (lambda () (interactive)
+;;                                     (lsp-signature-activate)))
+
 ;; ;; adjust peek-ui-width manually
 ;; ;; but these are inconvinience...
 ;; (define-key lsp-ui-mode-map (kbd "M-[ 1 ; 5 l") (lambda () (interactive)
