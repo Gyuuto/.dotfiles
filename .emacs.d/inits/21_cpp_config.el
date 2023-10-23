@@ -46,29 +46,41 @@
       (setq ccls-executable ccls_bin)
       (setq ccls-extra-init-params '(:completion (:detailedLabel t)))
       (setq lsp-prefer-capf t)
+
+      (require 'eglot)
+      ;;; set LSP programs to eglot
+      (add-to-list 'eglot-server-programs '(cc-mode . ("ccls")))
       (eval-after-load 'ccls
         '(progn
-           (add-hook 'c-mode-common-hook 'lsp)
+           (add-hook 'c-mode-common-hook 'eglot-ensure)
            )
         )
 
-      (require 'lsp-mode)
-      (eval-after-load 'lsp-mode
-        '(progn
-           (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
+      ;; (require 'lsp-mode)
+      ;; (eval-after-load 'lsp-mode
+      ;;   '(progn
+      ;;      (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
 
-           (setq lsp-headerline-breadcrumb-segments '(symbols))
-           (setq lsp-enable-on-type-formatting nil)
-           ))
+      ;;      (setq lsp-headerline-breadcrumb-segments '(symbols))
+      ;;      (setq lsp-enable-on-type-formatting nil)
+      ;;      (setq gc-cons-threshold 12800000)
+      ;;      (setq read-process-output-max (* 1024 1024))
+      ;;      ))
+      ;; (eval-after-load 'ccls
+      ;;   '(progn
+      ;;      (add-hook 'c-mode-common-hook 'lsp)
+      ;;      )
+      ;;   )
 
-      (require 'lsp-ui)
-      (eval-after-load 'lsp-ui
-        '(progn
-           (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+      ;; (require 'lsp-ui)
+      ;; (eval-after-load 'lsp-ui
+      ;;   '(progn
+      ;;      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
-           (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
-           (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
-           ))
+      ;;      (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
+      ;;      (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
+      ;;      ))
+
       )
   (if (file-exists-p (concat irony_bin))
     (progn
@@ -112,3 +124,32 @@
 
 ;; (require 'rtags)
 ;; (cmake-ide-setup)
+
+(require 'eglot)
+(cl-defmethod eglot-client-capabilities :around (server)
+  (let ((base (cl-call-next-method)))
+    (when (cl-find "ccls" (process-command
+                              (jsonrpc--process server))
+                   :test #'string-match)
+      (setf (cl-getf (cl-getf base :textDocument)
+                     :inactiveRegionsCapabilities)
+            '(:inactiveRegions t)))
+    base))
+
+(defvar-local eglot-clangd-inactive-region-overlays '())
+
+(cl-defmethod eglot-handle-notification
+  (_server (_method (eql textDocument/inactiveRegions))
+           &key regions textDocument &allow-other-keys)
+  (if-let* ((path (expand-file-name (eglot-uri-to-path
+                                     (cl-getf textDocument :uri))))
+            (buffer (find-buffer-visiting path)))
+      (with-current-buffer buffer
+        (mapc #'delete-overlay eglot-clangd-inactive-region-overlays)
+        (cl-loop
+         for r across regions
+         for (beg . end) = (eglot-range-region r)
+         for ov = (make-overlay beg end)
+         do
+         (overlay-put ov 'face 'shadow)
+         (push ov eglot-clangd-inactive-region-overlays)))))

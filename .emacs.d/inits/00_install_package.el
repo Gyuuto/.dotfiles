@@ -21,8 +21,9 @@
     company
     company-irony
     irony
-    lsp-mode
-    lsp-ui
+    eglot
+    ;; lsp-mode
+    ;; lsp-ui
     ;company-lsp
     ;;cquery
     ccls
@@ -55,6 +56,7 @@
     ivy-xref
     ivy-hydra
     counsel
+    counsel-tramp
     swiper
     smex
     ;;; etc

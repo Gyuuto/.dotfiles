@@ -97,17 +97,17 @@
      (cl-callf color-saturate-name (face-foreground face) 30))))
 (add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
 
-(require 'lsp-ui)
-;; (global-unset-key (kbd "C-M-."))
-(global-set-key (kbd "M-?") (lambda () (interactive)
-                              ;; (setq lsp-ui-peek-list-width (/ (window-pixel-width) 2))
-                              (lsp-ui-peek-find-references)))
+;; (require 'lsp-ui)
+;; ;; (global-unset-key (kbd "C-M-."))
+;; (global-set-key (kbd "M-?") (lambda () (interactive)
+;;                               ;; (setq lsp-ui-peek-list-width (/ (window-pixel-width) 2))
+;;                               (lsp-ui-peek-find-references)))
 
-;; adjust peek-ui-width manually
-;; but these are inconvinience...
-(define-key lsp-ui-mode-map (kbd "M-[ 1 ; 5 l") (lambda () (interactive)
-                                                  (setq lsp-ui-peek-list-width (* lsp-ui-peek-list-width 1.5))
-                                                  (lsp-ui-peek-find-references)))
-(define-key lsp-ui-mode-map (kbd "M-[ 1 ; 5 n") (lambda () (interactive)
-                                                  (setq lsp-ui-peek-list-width (/ lsp-ui-peek-list-width 1.5))
-                                                  (lsp-ui-peek-find-references)))
+;; ;; adjust peek-ui-width manually
+;; ;; but these are inconvinience...
+;; (define-key lsp-ui-mode-map (kbd "M-[ 1 ; 5 l") (lambda () (interactive)
+;;                                                   (setq lsp-ui-peek-list-width (* lsp-ui-peek-list-width 1.5))
+;;                                                   (lsp-ui-peek-find-references)))
+;; (define-key lsp-ui-mode-map (kbd "M-[ 1 ; 5 n") (lambda () (interactive)
+;;                                                   (setq lsp-ui-peek-list-width (/ lsp-ui-peek-list-width 1.5))
+;;                                                   (lsp-ui-peek-find-references)))
