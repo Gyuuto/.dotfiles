@@ -37,77 +37,52 @@
             'c++-mode-hooks
             ))
 
-;;; config cquery when cquery binary exists otherwise config company-irony
-;; (setq cquery_bin (if (string= window-system "w32") "~/.emacs.d/cquery/bin/cquery.exe" "~/.emacs.d/cquery/bin/cquery"))
-(setq ccls_bin (if (string= window-system "w32") "~/.emacs.d/ccls/bin/ccls.exe" "~/.emacs.d/ccls/bin/ccls"))
-(setq irony_bin (if (string= window-system "w32") "~/.emacs.d/irony/bin/irony-server.exe" "~/.emacs.d/irony/bin/irony-server"))
-(if (file-exists-p ccls_bin)
-    (progn
-      (require 'ccls)
-      (setq ccls-executable ccls_bin)
-      (setq ccls-extra-init-params '(:completion (:detailedLabel t)))
-      (setq lsp-prefer-capf t)
+;; using clang in smart compile
+(add-to-list 'smart-compile-alist
+             '("\\.cpp$" . "clang++ -O2 -Wall -o %n %f -lstdc++ -std=c++17"))
 
-      (require 'eglot)
-      ;;; set LSP programs to eglot
-      (add-to-list 'eglot-server-programs
-                   '(c++-mode . ("ccls" :initializationOptions
-                                 (:capabilities
-                                  (:documentOnTypeFormattingProvider (:firstTriggerCharacter "")) ; disable auto formatting
-                                  )))
-                   )
-      (eval-after-load 'ccls
-        '(progn
-           (add-hook 'c-mode-common-hook 'eglot-ensure)
-           )
-        )
+;;; config ccls and eglot
+(require 'ccls)
+(setq ccls-extra-init-params '(:completion (:detailedLabel t)))
+(setq lsp-prefer-capf t)
 
-      ;; (require 'lsp-mode)
-      ;; (eval-after-load 'lsp-mode
-      ;;   '(progn
-      ;;      (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
+(require 'eglot)
+(add-to-list 'eglot-server-programs
+             '(c++-mode . ("ccls" :initializationOptions
+                           (:capabilities
+                            (:documentOnTypeFormattingProvider (:firstTriggerCharacter "")) ; disable auto formatting
+                            )))
+             )
+(eval-after-load 'ccls
+  '(progn
+     (add-hook 'c-mode-common-hook 'eglot-ensure)
+     )
+  )
 
-      ;;      (setq lsp-headerline-breadcrumb-segments '(symbols))
-      ;;      (setq lsp-enable-on-type-formatting nil)
-      ;;      (setq gc-cons-threshold 12800000)
-      ;;      (setq read-process-output-max (* 1024 1024))
-      ;;      ))
-      ;; (eval-after-load 'ccls
-      ;;   '(progn
-      ;;      (add-hook 'c-mode-common-hook 'lsp)
-      ;;      )
-      ;;   )
+;; (require 'lsp-mode)
+;; (eval-after-load 'lsp-mode
+;;   '(progn
+;;      (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
 
-      ;; (require 'lsp-ui)
-      ;; (eval-after-load 'lsp-ui
-      ;;   '(progn
-      ;;      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+;;      (setq lsp-headerline-breadcrumb-segments '(symbols))
+;;      (setq lsp-enable-on-type-formatting nil)
+;;      (setq gc-cons-threshold 12800000)
+;;      (setq read-process-output-max (* 1024 1024))
+;;      ))
+;; (eval-after-load 'ccls
+;;   '(progn
+;;      (add-hook 'c-mode-common-hook 'lsp)
+;;      )
+;;   )
 
-      ;;      (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
-      ;;      (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
-      ;;      ))
+;; (require 'lsp-ui)
+;; (eval-after-load 'lsp-ui
+;;   '(progn
+;;      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
-      )
-  (if (file-exists-p (concat irony_bin))
-    (progn
-      (require 'irony)
-      (require 'company-irony)
-      (eval-after-load "irony"
-        '(progn
-           (custom-set-variables '(irony-additional-clang-options '("-std=c++14 -fopenmp")))
-           (add-to-list 'company-backends 'company-irony)
-           (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-           (add-hook 'c-mode-common-hook 'irony-mode)
-           ))
-      (eval-after-load 'company
-        '(progn
-           (add-to-list 'company-backends 'company-irony-other)
-           (add-to-list 'company-backends 'company-irony)
-           ))
-      )
-  (setq company-backends (delete 'company-clang company-backends))
-  (add-to-list 'company-backends 'company-irony)
-  ))
+;;      (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
+;;      (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
+;;      ))
 
 (require 'flycheck)
 (flycheck-define-checker c/c++
