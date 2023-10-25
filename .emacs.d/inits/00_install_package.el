@@ -15,6 +15,7 @@
     rust-mode
     vue-mode
     typescript-mode
+
     ;;; useful for programming
     smart-compile
     auto-complete
@@ -33,17 +34,23 @@
     region-bindings-mode
     cmake-ide
     rainbow-delimiters
-    flycheck
-    flycheck-rust
-    flycheck-irony
-    flycheck-popup-tip
+    flymake
+    flymake-diagnostic-at-point
+    ;; ivy-posframe
+    ;; flycheck
+    ;; flycheck-rust
+    ;; flycheck-irony
+    ;; flycheck-popup-tip
     racer
+
     ;;; shell ?
     shell-command+
     exec-path-from-shell
+
     ;;; useful for buffer
     popwin
     ace-window
+
     ;;;; helm
     helm
     helm-swoop
@@ -51,6 +58,7 @@
     helm-gtags
     helm-ls-git
     helm-xref
+
     ;;;; ivy
     ivy
     ivy-xref
@@ -59,6 +67,7 @@
     counsel-tramp
     swiper
     smex
+
     ;;; etc
     yatex
     ansi-color
