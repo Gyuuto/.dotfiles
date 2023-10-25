@@ -140,54 +140,55 @@
         (when (cl-find "ccls" (process-command
                                  (jsonrpc--process server))
                        :test #'string-match)
-          (setf (cl-getf (cl-getf base :textDocument)
-                         :inactiveRegionsCapabilities)
-                '(:inactiveRegions t)))
+          (setf (cl-getf (cl-getf base :$ccls)
+                         :publishSkippedRangesCapabilities)
+                '(:publishSkippedRanges t)))
         base))
 
-    (defvar-local eglot-clangd-inactive-region-overlays '())
+    (defvar-local eglot-ccls-inactive-range-overlays '())
     (cl-defmethod eglot-handle-notification
-      (_server (_method (eql textDocument/inactiveRegions))
-               &key regions textDocument &allow-other-keys)
-      (if-let* ((path (expand-file-name (eglot-uri-to-path
-                                         (cl-getf textDocument :uri))))
-                (buffer (find-buffer-visiting path)))
+      (_server (_method (eql $ccls/publishSkippedRanges)) &rest _params)
+      (if-let* ((path (expand-file-name (eglot--uri-to-path (cl-getf _params :uri))))
+                (buffer (find-buffer-visiting path))
+                (regions (cl-getf _params :skippedRanges)))
           (with-current-buffer buffer
-            (mapc #'delete-overlay eglot-clangd-inactive-region-overlays)
+            (mapc #'delete-overlay eglot-ccls-inactive-range-overlays)
             (cl-loop
              for r across regions
-             for (beg . end) = (eglot-range-region r)
+             for (beg . end) = (eglot--range-region r)
              for ov = (make-overlay beg end)
              do
              (overlay-put ov 'face 'shadow)
-             (push ov eglot-clangd-inactive-region-overlays)))))
+             (push ov eglot-ccls-inactive-range-overlays)))
+        )
+      )
 
-    (defun eglot-ccls-inheritance-hierarchy (&optional derived)
-      "Show inheritance hierarchy for the thing at point.
-If DERIVED is non-nil (interactively, with prefix argument), show
-the children of class at point."
-      (interactive "P")
-      (if-let* ((res (jsonrpc-request
-                      (eglot--current-server-or-lose)
-                      :$ccls/inheritance
-                      (append (eglot--TextDocumentPositionParams)
-                              `(:derived ,(if derived t :json-false))
-                              '(:levels 100) '(:hierarchy t))))
-                (tree (list (cons 0 res))))
-          (with-help-window "*ccls inheritance*"
-            (with-current-buffer standard-output
-              (while tree
-                (pcase-let ((`(,depth . ,node) (pop tree)))
-                  (cl-destructuring-bind (&key uri range) (plist-get node :location)
-                    (insert (make-string depth ?\ ) (plist-get node :name) "\n")
-                    (make-text-button (+ (point-at-bol 0) depth) (point-at-eol 0)
-                                      'action (lambda (_arg)
-                                                (interactive)
-                                                (find-file (eglot--uri-to-path uri))
-                                                (goto-char (car (eglot--range-region range)))))
-                    (cl-loop for child across (plist-get node :children)
-                             do (push (cons (1+ depth) child) tree)))))))
-        (eglot--error "Hierarchy unavailable")))
+;;     (defun eglot-ccls-inheritance-hierarchy (&optional derived)
+;;       "Show inheritance hierarchy for the thing at point.
+;; If DERIVED is non-nil (interactively, with prefix argument), show
+;; the children of class at point."
+;;       (interactive "P")
+;;       (if-let* ((res (jsonrpc-request
+;;                       (eglot--current-server-or-lose)
+;;                       :$ccls/inheritance
+;;                       (append (eglot--TextDocumentPositionParams)
+;;                               `(:derived ,(if derived t :json-false))
+;;                               '(:levels 100) '(:hierarchy t))))
+;;                 (tree (list (cons 0 res))))
+;;           (with-help-window "*ccls inheritance*"
+;;             (with-current-buffer standard-output
+;;               (while tree
+;;                 (pcase-let ((`(,depth . ,node) (pop tree)))
+;;                   (cl-destructuring-bind (&key uri range) (plist-get node :location)
+;;                     (insert (make-string depth ?\ ) (plist-get node :name) "\n")
+;;                     (make-text-button (+ (point-at-bol 0) depth) (point-at-eol 0)
+;;                                       'action (lambda (_arg)
+;;                                                 (interactive)
+;;                                                 (find-file (eglot--uri-to-path uri))
+;;                                                 (goto-char (car (eglot--range-region range)))))
+;;                     (cl-loop for child across (plist-get node :children)
+;;                              do (push (cons (1+ depth) child) tree)))))))
+;;         (eglot--error "Hierarchy unavailable")))
 
-    (global-set-key (kbd "C-c _") 'eglot-ccls-inheritance-hierarchy)
+;;     (global-set-key (kbd "C-c _") 'eglot-ccls-inheritance-hierarchy)
     ))
