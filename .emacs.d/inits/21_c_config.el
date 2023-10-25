@@ -12,11 +12,28 @@
             (setq c-basic-offset tab-width)
             ))
 
+;; using clang in smart compile
+(add-to-list 'smart-compile-alist
+             '("\\.c$" . "gcc -O2 -Wall -o %n %f -std=c17")
+             ;; '("\\.c$" . "clang -O2 -Wall -o %n %f -lstdc++ -std=c17")
+             )
+
 ;; (require 'auto-complete-c-headers)
 ;; (add-hook 'c-mode-hook '(setq ac-sources (append ac-sources '(ac-source-c-headers))))
 ;(define-key c-mode-map [(tab)] 'company-complete)
 (add-to-list 'company-backends 'company-c-headers)
 
+(require 'eglot)
+(add-to-list 'eglot-server-programs
+             '(c-mode . ("ccls" :initializationOptions
+                         (:capabilities
+                          (:documentOnTypeFormattingProvider (:firstTriggerCharacter "")) ; disable auto formatting
+                          ))))
+(eval-after-load 'ccls
+  '(progn
+     (add-hook 'c-mode-common-hook 'eglot-ensure)
+     )
+  )
 
 (require 'flycheck)
 (flycheck-define-checker c/c++
