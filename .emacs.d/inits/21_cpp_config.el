@@ -50,7 +50,12 @@
 
       (require 'eglot)
       ;;; set LSP programs to eglot
-      (add-to-list 'eglot-server-programs '(cc-mode . ("ccls")))
+      (add-to-list 'eglot-server-programs
+                   '(c++-mode . ("ccls" :initializationOptions
+                                 (:capabilities
+                                  (:documentOnTypeFormattingProvider (:firstTriggerCharacter "")) ; disable auto formatting
+                                  )))
+                   )
       (eval-after-load 'ccls
         '(progn
            (add-hook 'c-mode-common-hook 'eglot-ensure)
