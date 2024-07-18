@@ -15,6 +15,7 @@
     rust-mode
     vue-mode
     typescript-mode
+    csharp-mode
 
     ;;; useful for programming
     smart-compile

@@ -19,6 +19,7 @@
        '(("\\.glsl$" . c++-mode))
        '(("\\.cxx$" . c++-mode))
        '(("\\.hpp$" . c++-mode))
+       '(("\\.cs$" . csharp-mode))
        '(("\\.java$" . java-mode))
        '(("\\.ml[iylp]?$" . tuareg-mode))
        '(("\\.cmake$" . cmake-mode))
