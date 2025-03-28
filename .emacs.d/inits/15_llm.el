@@ -24,5 +24,5 @@
   ;;         )
 
   ;; customize display
-  (push '("ellama.*\.org" :regexp t) popwin:special-display-config)
+  (push '("ellama.*\.org" :regexp t :height 0.5) popwin:special-display-config)
   )
