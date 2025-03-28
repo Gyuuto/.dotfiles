@@ -68,6 +68,10 @@
     swiper
     smex
 
+    ;;; LLM
+    llm
+    ellama
+
     ;;; etc
     yatex
     ansi-color
