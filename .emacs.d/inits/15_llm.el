@@ -6,7 +6,8 @@
   (require 'llm-ollama)
 
   (setopt ellama-language "Japanese")
-  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
+  ;; disable this due to not a good match to popwin
+  ;; (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
 
   ;; set provider
   (setopt ellama-provider
