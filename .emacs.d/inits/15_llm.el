@@ -2,10 +2,11 @@
   :ensure t
   :bind ("C-c g" . ellama-transient-main-menu)
   :init
-  (setopt ellama-language "Japanese")
-  (setopt ellama-naming-scheme "ellama-generate-name-by-llm")
 
   (require 'llm-ollama)
+
+  (setopt ellama-language "Japanese")
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
 
   ;; set provider
   (setopt ellama-provider
