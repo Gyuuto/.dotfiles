@@ -76,6 +76,7 @@
     ;;; etc
     yatex
     ansi-color
+    orgtbl-aggregate
     ))
 
 (let ((not-installed (loop for x in installing-package-list
