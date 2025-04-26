@@ -24,6 +24,7 @@
     company-irony
     irony
     eglot
+    eglot-inactive-regions
     ;; lsp-mode
     ;; lsp-ui
     ;company-lsp
