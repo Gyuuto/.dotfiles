@@ -71,8 +71,9 @@
     smex
 
     ;;; LLM
-    llm
-    ellama
+    ;; llm
+    ;; ellama
+    gptel
 
     ;;; etc
     yatex
