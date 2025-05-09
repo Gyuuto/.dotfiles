@@ -5,15 +5,15 @@
   (setq
    gptel-model 'gemma3:4b
    gptel-backend (gptel-make-ollama "chat"
-                   :host "localhost:11434"
+                   :host ""
                    :stream t
-                   :models '(gemma3:4b)
+                   :models '()
                    :request-params '(:options (:num_ctx 16384))))
 
   (gptel-make-ollama "coder"
-    :host "localhost:11434"
+    :host ""
     :stream t
-    :models '(deepseek-coder:6.7b)
+    :models '()
     :request-params '(:options (:num_ctx 16384)))
 
   (global-set-key (kbd "C-c g") 'gptel-menu)
