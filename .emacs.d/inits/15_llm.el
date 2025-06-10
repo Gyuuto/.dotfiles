@@ -2,6 +2,9 @@
   :ensure t
   :config
 
+  (when (eq window-system 'w32)
+    (setq gptel-use-curl nil))
+
   (setq
    gptel-model 'gemma3:4b
    gptel-backend (gptel-make-ollama "chat"
