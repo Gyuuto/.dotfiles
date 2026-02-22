@@ -64,3 +64,8 @@
 (when (eq system-type 'darwin)
   (require 'ls-lisp)
   (setq ls-lisp-use-insert-directory-program nil))
+
+;; コントロール用のバッファを同一フレーム内に表示する
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; ediff のバッファを左右に並べる（"|"キーで上下、左右の切り替え可）
+(setq ediff-split-window-function 'split-window-horizontally)
