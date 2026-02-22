@@ -33,9 +33,6 @@
   (exec-path-from-shell-initialize)
   )
 
-;; magit shortcut
-(global-set-key (kbd "C-x g") 'magit-status)
-
 ;; dont tell uppercase from downcase
 (setq completion-ignore-case t)
 

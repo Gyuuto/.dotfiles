@@ -56,31 +56,6 @@
   (eglot-inactive-regions-mode 1)
   )
 
-;; (require 'lsp-mode)
-;; (eval-after-load 'lsp-mode
-;;   '(progn
-;;      (add-hook 'lsp-mode-hook 'lsp-headerline-breadcrumb-mode)
-
-;;      (setq lsp-headerline-breadcrumb-segments '(symbols))
-;;      (setq lsp-enable-on-type-formatting nil)
-;;      (setq gc-cons-threshold 12800000)
-;;      (setq read-process-output-max (* 1024 1024))
-;;      ))
-;; (eval-after-load 'ccls
-;;   '(progn
-;;      (add-hook 'c-mode-common-hook 'lsp)
-;;      )
-;;   )
-
-;; (require 'lsp-ui)
-;; (eval-after-load 'lsp-ui
-;;   '(progn
-;;      (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-
-;;      (define-key lsp-ui-mode-map (kbd "C-_") 'lsp-ui-sideline-toggle-symbols-info) ; only run via terminal?
-;;      (define-key lsp-ui-mode-map (kbd "C-?") 'lsp-ui-sideline-toggle-symbols-info)
-;;      ))
-
 (require 'flycheck)
 (flycheck-define-checker c/c++
   "A C/C++ checker using g++."
@@ -99,10 +74,6 @@
 (setq auto-insert-alist
       (append '( ("\\.cpp$" . "template.cpp")
                  ) auto-insert-alist))
-
-;; (require 'rtags)
-;; (cmake-ide-setup)
-
 
 ;; eglot customization
 ;; (with-eval-after-load 'eglot

@@ -3,10 +3,9 @@
 
 (setq pop-up-windows nil)
 (when (require 'popwin)
-  (setq anything-samewindow nil)
-  (push '("anything" :regexp t :height 0.5) popwin:special-display-config)
-  (push '("helm" :regexp t :height 0.5) popwin:special-display-config)
-  (push '("helm-mini" :regexp t :height 0.5) popwin:special-display-config)
+  ;; (push '("anything" :regexp t :height 0.5) popwin:special-display-config)
+  ;; (push '("helm" :regexp t :height 0.5) popwin:special-display-config)
+  ;; (push '("helm-mini" :regexp t :height 0.5) popwin:special-display-config)
   (push '("*Completions*" :height 0.4) popwin:special-display-config)
   (push '("*Compile-Log*" :height 0.4 :noselect t :stick t) popwin:special-display-config)
   (push '("*compilation*" :height 0.4 :noselect t :stick t) popwin:special-display-config)
