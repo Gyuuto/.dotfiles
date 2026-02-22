@@ -9,17 +9,13 @@
     (load-file init_host))
 
 
-;; add package (melpa, maramalade)
-(require 'package)
-(setq pakcage-user-dir (concat system_path "/.emacs.d/elisp/elpa"))
-;(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; deprecated
-;; (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
-;; for avoiding gnu signature check (spin?)
-; (setq package-check-signature nil)
-(package-initialize)
-
+;; add package
+(with-eval-after-load 'package
+  (setq pakcage-user-dir (concat system_path "/.emacs.d/elisp/elpa"))
+  (setq package-gnupghome-dir (concat system_path "/.emacs.d/elpa/gnupg"))
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  (add-to-list 'package-archives '("nognu" . "https://elpa.nongnu.org/nongnu/"))
+  (package-initialize))
 
 ;; init-loader
 (require 'init-loader)
