@@ -10,7 +10,8 @@
   (setq completion-ignore-case t)
 
   (require 'vertico-directory)
-  (define-key vertico-map (kbd "DEL") #'vertico-directory-up)
+  (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-char)
+  (define-key vertico-map (kbd "M-DEL") #'vertico-directory-up)
   )
 
 (require 'orderless)
