@@ -47,22 +47,19 @@
 
 (setq dired-listing-switches "-alh")
 
-(defvar helm-c-source-dired-various-sort
-  '((name . "Dired various sort type")
-    (candidates . (lambda ()
-                    (mapcar (lambda (x)
-                              (cons (concat (cdr x) " (" (car x) ")") x))
-                            dired-various-sort-type)))
-    (action . (("Set sort type" . (lambda (candidate)
-                                    (dired-various-sort-change dired-various-sort-type candidate)))))
-    ))
+(defun vertico-source-dired-various-sort ()
+  (interactive)
+  (let* ((choices '(("name" . "")
+                    ("size" . "-S")
+                    ("time" . "-t")
+                    ("extension" . "-X")))
+         (choice (completing-read "Sort by: " choices nil t))
+         (switches (cdr (assoc choice choices))))
+    (dired-sort-other (concat "-al" switches))))
 
 (add-hook 'dired-mode-hook
           (lambda ()
             (define-key dired-mode-map "s" 'dired-various-sort-change-or-edit)
-            (define-key dired-mode-map "c"
-              (lambda ()
-                (interactive)
-                (helm '(helm-c-source-dired-various-sort))))
-            ))
+            (define-key dired-mode-map "c" 'vertico-source-dired-various-sort))
+          )
 
