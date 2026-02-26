@@ -29,4 +29,4 @@
 (global-set-key (kbd "M-y") 'consult-yank-from-kill-ring)
 (global-set-key (kbd "M-g g") 'consult-goto-line)
 (global-set-key (kbd "C-x C-x") 'consult-line)
-(global-set-key (kbd "C-x r") 'consult-grep)
+(global-set-key (kbd "C-x C-r") 'consult-grep)
