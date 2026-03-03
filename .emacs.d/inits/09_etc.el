@@ -36,6 +36,9 @@
 ;; dont tell uppercase from downcase
 (setq completion-ignore-case t)
 
+;; can be call M-x in minibuffer
+(setq enable-recursive-minibuffers  t)
+
 ;; for Windows, using git-bash instead of cmd
 (when (eq window-system 'w32)
   (setq explicit-shell-file-name
