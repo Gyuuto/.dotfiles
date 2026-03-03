@@ -6,8 +6,10 @@
 (with-eval-after-load 'vertico
   (vertico-mode)
   (marginalia-mode)
-  (savehist-mode)
+  (savehist-mode 1)
+
   (setq completion-ignore-case t)
+  (setq vertico-resize t)
 
   (require 'vertico-directory)
   (define-key vertico-map (kbd "DEL") #'vertico-directory-delete-char)
@@ -17,10 +19,17 @@
 (require 'orderless)
 (with-eval-after-load 'orderless
   (setq completion-styles '(orderless basic substring partial-completion flex))
-  )  
+  (setq completion-category-defaults nil)
+  (setq completion-category-overrides
+        '((file (styles basic partial-completion))
+          (command (styles basic))
+          (variable (styles basic))
+          (symbol (styles basic))))
+  )
 
 (require 'consult)
 (with-eval-after-load 'consult
+  (setq completion-in-region-function #'consult-completion-in-region)
   (with-eval-after-load 'embark
     (require 'embark-consult)))
 
