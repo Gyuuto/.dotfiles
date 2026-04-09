@@ -73,6 +73,7 @@
     ;; ellama
     gptel
     aidermacs
+    minuet
 
     ;;; etc
     yatex
