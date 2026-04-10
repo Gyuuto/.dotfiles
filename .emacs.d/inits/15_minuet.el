@@ -14,13 +14,14 @@
   (setq minuet-context-window 512)
   (setq minuet-request-timeout 15)
 
-  (plist-put minuet-openai-compatible-options
-             :end-point "")
-  (plist-put minuet-openai-compatible-options
-             :name "")
-  (plist-put minuet-openai-compatible-options
-             :api-key "TERM")
-  (plist-put minuet-openai-compatible-options
-             :model "")
+  (let* ((server my/llm-server-latest-light-coder))
+    (plist-put minuet-openai-compatible-options
+               :end-point (my/llm-server-make-endpoint server))
+    (plist-put minuet-openai-compatible-options
+               :name "ollama")
+    (plist-put minuet-openai-compatible-options
+               :api-key (my/llm-server-api-key server))
+    (plist-put minuet-openai-compatible-options
+               :model (format "%s" (car (my/llm-server-model server)))))
 )
 
