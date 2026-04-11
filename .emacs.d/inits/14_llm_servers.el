@@ -25,6 +25,12 @@
    :model '()
    :api-key "TERM"))
 
+(defvar my/llm-server-agent-coder
+  (make-my/llm-server
+   :host ""
+   :model '()
+   :api-key "TERM"))
+
 (defun my/llm-server-make-endpoint (s)
   (concat "http://" (my/llm-server-host s) "/v1/chat/completions"))
 

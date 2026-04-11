@@ -4,16 +4,16 @@
          ("C-c C-a" . aidermacs-transient-menu))
 
   :config
-  (let* ((chat-server my/llm-server-latest-light-chat)
-         (coder-server my/llm-server-latest-light-coder))
-    (let* ((model-name (format "openai/%s" (car (my/llm-server-model coder-server)))))
+  (let* ((coder-server my/llm-server-agent-coder))
+    (let* ((model-name (format "openai/%s" (car (my/llm-server-model coder-server))))
+           (api-base (my/llm-server-make-base coder-server))
+           (api-key "TERM"))
       (setq aidermacs-extra-args
             `("--model" ,model-name
-              "--no-auto-commits"
+              "--openai-api-base" ,api-base
+              "--openai-api-key" ,api-key
               "--no-auto-accept-architect"
-              "--subtree-only")))
-    (setenv "OPENAI_API_KEY" "TERM")
-    (setenv "OPENAI_API_BASE" (my/llm-server-make-base chat-server)))
+              "--subtree-only"))))
 
   ;; 文字化け防止
   ;; TODO: check these vars affect to others
