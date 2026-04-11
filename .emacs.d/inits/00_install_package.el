@@ -72,7 +72,8 @@
     ;; llm
     ;; ellama
     gptel
-    aidermacs
+    ;; aidermacs
+    eca
     minuet
 
     ;;; etc
