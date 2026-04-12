@@ -1,0 +1,70 @@
+{
+    "providers": {
+        "ollama": {"url": "http://localhost:11434"}
+    },
+    "defaultModel": null, // let ECA decides the default model.
+    "netrcFile": null, // search ~/.netrc or ~/_netrc when null.
+    "hooks": {},
+    "rules" : [],
+    "commands" : [],
+    "disabledTools": [],
+    "toolCall": {
+        "approval": {
+            "byDefault": "ask",
+            "allow": {"eca__directory_tree": {},
+                      "eca__read_file": {},
+                      "eca__grep": {},
+                      "eca__preview_file_change": {},
+                      "eca__editor_diagnostics": {}},
+            "ask": {},
+            "deny": {}
+        },
+        "readFile": {
+            "maxLines": 2000
+        },
+        "shellCommand": {
+            "summaryMaxLength": 30
+        }
+    },
+    "mcpTimeoutSeconds" : 60,
+    "lspTimeoutSeconds" : 30,
+    "mcpServers" : {},
+    "agent": {
+        "code": {"prompts": {"chat": "${classpath:prompts/code_agent.md}"},
+                 "disabledTools": ["preview_file_change"]},
+        "plan": {"prompts": {"chat": "${classpath:prompts/plan_agent.md}"},
+                 "disabledTools": ["edit_file", "write_file", "move_file"],
+                 "toolCall": {"approval": {"deny": {"eca__shell_command":
+                                                    {"argsMatchers": {"command": [".*[12&]?>>?\\s*(?!/dev/null($|\\s))(?!&\\d+($|\\s))\\S+.*",
+                                                                                  ".*\\|\\s*(tee|dd|xargs).*",
+                                                                                  ".*\\b(sed|awk|perl)\\s+.*-i.*",
+                                                                                  ".*\\b(rm|mv|cp|touch|mkdir)\\b.*",
+                                                                                  ".*git\\s+(add|commit|push).*",
+                                                                                  ".*npm\\s+install.*",
+                                                                                  ".*-c\\s+[\"'].*open.*[\"']w[\"'].*",
+                                                                                  ".*bash.*-c.*[12&]?>>?\\s*(?!/dev/null($|\\s))(?!&\\d+($|\\s))\\S+.*"]}}}}}}
+    },
+    "defaultAgent": "code",
+    "welcomeMessage" : "Welcome to ECA!\n\nType '/' for commands\n\n",
+    "autoCompactPercentage": 85,
+    "index" : {
+        "ignoreFiles" : [ {
+            "type" : "gitignore"
+        } ],
+        "repoMap": {
+            "maxTotalEntries": 800,
+            "maxEntriesPerDir": 50
+        }
+    },
+    "prompts": {
+        "chat": "${classpath:prompts/code_agent.md}", // default to code agent
+        "chatTitle": "${classpath:prompts/title.md}",
+        "compact": "${classpath:prompts/compact.md}",
+        "init": "${classpath:prompts/init.md}",
+        "completion": "${classpath:prompts/inline_completion.md}",
+        "rewrite": "${classpath:prompts/rewrite.md}"
+    },
+    "completion": {
+        "model": ""
+    }
+}
