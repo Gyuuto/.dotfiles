@@ -12,9 +12,9 @@
                      :host (my/llm-server-host server)
                      :stream t
                      :models (my/llm-server-model server)
-                     :request-params '(:options (:num_ctx 16384)))))
                      :protocol "http"
                      :endpoint "/v1/chat/completions"
+                     :request-params '(:options (:num_ctx 16384)))))
 
   (let* ((server my/llm-server-latest-chat))
     (gptel-make-openai "latest-chat"
@@ -30,9 +30,9 @@
       :host (my/llm-server-host server)
       :stream t
       :models (my/llm-server-model server)
-      :request-params '(:options (:num_ctx 16384))))
       :protocol "http"
       :endpoint "/v1/chat/completions"
+      :request-params '(:options (:num_ctx 16384))))
 
   (let* ((server my/llm-server-latest-coder))
     (gptel-make-ollama "latest-coder"
