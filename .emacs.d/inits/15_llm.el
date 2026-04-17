@@ -8,31 +8,39 @@
   (let* ((server my/llm-server-latest-light-chat))
     (setq
      gptel-model (my/llm-server-model server)
-     gptel-backend (gptel-make-ollama "latest-light-chat"
+     gptel-backend (gptel-make-openai "latest-light-chat"
                      :host (my/llm-server-host server)
                      :stream t
                      :models (my/llm-server-model server)
                      :request-params '(:options (:num_ctx 16384)))))
+                     :protocol "http"
+                     :endpoint "/v1/chat/completions"
 
   (let* ((server my/llm-server-latest-chat))
-    (gptel-make-ollama "latest-chat"
+    (gptel-make-openai "latest-chat"
       :host (my/llm-server-host server)
       :stream t
       :models (my/llm-server-model server)
+      :protocol "http"
+      :endpoint "/v1/chat/completions"
       :request-params '(:options (:num_ctx 8192))))
 
   (let* ((server my/llm-server-latest-light-coder))
-    (gptel-make-ollama "latest-light-coder"
+    (gptel-make-openai "latest-light-coder"
       :host (my/llm-server-host server)
       :stream t
       :models (my/llm-server-model server)
       :request-params '(:options (:num_ctx 16384))))
+      :protocol "http"
+      :endpoint "/v1/chat/completions"
 
   (let* ((server my/llm-server-latest-coder))
     (gptel-make-ollama "latest-coder"
       :host (my/llm-server-host server)
       :stream t
       :models (my/llm-server-model server)
+      :protocol "http"
+      :endpoint "/v1/chat/completions"
       :request-params '(:options (:num_ctx 8192))))
 
   (setq gptel-directives
