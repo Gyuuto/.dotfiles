@@ -55,7 +55,7 @@
                     ("extension" . "X")))
          (choice (completing-read "Sort by: " choices nil t))
          (switches (cdr (assoc choice choices))))
-    (dired-sort-other (concat "-al" switches))))
+    (dired-sort-other (concat "-ahl" switches))))
 
 (add-hook 'dired-mode-hook
           (lambda ()
