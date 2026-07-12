@@ -8,6 +8,47 @@
     "rules" : [],
     "commands" : [],
     "disabledTools": [],
+    "customTools": {
+        "web-search": {
+            "description": "Searches the web using DuckDuckGo and returns results (title, URL, snippet) as JSON. Use this when you need to find information about a topic you don't know, or when you need the latest information.",
+            "command": "python3 -c \"from ddgs import DDGS; import json,sys; print(json.dumps(DDGS().text('{{query}}', max_results=5), ensure_ascii=False))\"",
+            "schema": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The search query."
+                    }
+                },
+                "required": ["query"]
+            }
+        },
+        "web-fetch": {
+            "description": "Fetches the content of a URL and returns it in Markdown format. Use this to read the full content of a page found via web-search.",
+            "command": "trafilatura --output-format=markdown -u \"{{url}}\"",
+            "schema": {
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "The URL to fetch content from."
+                    }
+                },
+                "required": ["url"]
+            }
+        },
+        "web-news": {
+            "description": "Searches recent news using DuckDuckGo and returns results as JSON. Use this when you specifically need the latest news about a topic.",
+            "command": "python3 -c \"from ddgs import DDGS; import json,sys; print(json.dumps(DDGS().news('{{query}}', max_results=5), ensure_ascii=False))\"",
+            "schema": {
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The news search query."
+                    }
+                },
+                "required": ["query"]
+            }
+        }
+    },
     "toolCall": {
         "approval": {
             "byDefault": "ask",
