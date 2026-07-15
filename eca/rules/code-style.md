@@ -75,6 +75,46 @@ Establish consistent rules for module creation, testing, and error reporting so 
 - Verify the file's current content matches your expectations before applying changes.
 - Use the exact content from the read output as `original_content` in replacements — do not invent or modify it.
 
+### Sub-Agent Usage
+
+Evaluate whether to use sub-agents based on task complexity, parallelization potential, and context requirements.
+
+#### When to Use Sub-Agents
+
+Delegate to sub-agents when:
+
+- **Parallelizable independent tasks**: Multiple modules can be implemented simultaneously, or multiple test files can be created in parallel.
+- **Large codebase exploration**: Searching for specific implementation patterns in an existing large project.
+- **Long-running research**: Referencing external documentation, API specifications, or performing multi-step investigations.
+- **Focused code review**: Analyzing specific directories or files for improvements without polluting the main context.
+
+#### When NOT to Use Sub-Agents
+
+Handle tasks directly without sub-agents when:
+
+- **Single file operations**: Creating or editing one file is more efficient done directly.
+- **Simple lookups**: Basic file reads, grep searches, or directory listings.
+- **Iterative debugging**: Debugging test failures requires immediate file inspection and correction.
+- **Small task collections**: When tasks are too granular, the overhead of spawning sub-agents exceeds the benefit.
+
+#### Context Management Considerations
+
+- Sub-agents do not share context with the main agent. Information must be explicitly passed back.
+- For multi-step tasks requiring context continuity, prefer direct execution.
+- When delegating, provide highly detailed instructions including expected output format.
+- Avoid nesting sub-agents (sub-agents cannot spawn other agents).
+
+#### Decision Guide
+
+| Task Type | Approach |
+|---|---|
+| Project structure exploration | Sub-agent |
+| Single module implementation | Direct |
+| Multiple independent modules | Sub-agents (parallel) |
+| Test writing & debugging | Direct |
+| Code review of specific directory | Sub-agent |
+| Simple file read/edit | Direct |
+
 ## Steps
 
 1. **Identify** the module or task you are working on.
