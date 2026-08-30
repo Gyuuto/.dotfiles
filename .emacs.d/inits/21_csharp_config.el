@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; C# style
 ;(fa-config-default)
 (add-hook 'csharp-mode-hook

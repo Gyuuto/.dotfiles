@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Matlab style
 (add-hook 'octave-mode-hook
           (lambda()

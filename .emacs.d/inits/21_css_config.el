@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; css-modeの設定
 (require 'css-mode)
 (setq auto-mode-alist

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'web-mode)
 
 (setq web-mode-enable-auto-closing t)

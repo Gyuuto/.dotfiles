@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;javascript
 (autoload 'js-mode "js" nil t)
 (add-hook 'js-mode-hook

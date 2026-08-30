@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (cl-defstruct my/llm-server
   host model api-key)
 

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; dired-mode
 (setq dired-dwim-target t)
 (setq dired-recursive-copies 'always)

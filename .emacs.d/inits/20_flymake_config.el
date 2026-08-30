@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; flymake
 (require 'flymake-diagnostic-at-point)
 (with-eval-after-load 'flymake

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'company)
 (when (locate-library "company")
   (global-company-mode 1)

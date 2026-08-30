@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; C++ style
 (defun c++-mode-hooks()
   (font-lock-add-keywords

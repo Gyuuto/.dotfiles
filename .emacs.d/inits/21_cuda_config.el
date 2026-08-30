@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; maybe this is for c++11 syntax
 (defun cuda-mode-hooks()
   (font-lock-add-keywords

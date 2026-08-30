@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'cl)
 
 (defvar installing-package-list

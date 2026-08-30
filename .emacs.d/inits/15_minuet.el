@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package minuet
   :bind
   (("C-c <tab>" . #'minuet-show-suggestion)

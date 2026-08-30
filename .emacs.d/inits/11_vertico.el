@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (require 'vertico)
 
 ;; print completion candidates at most 20 lines

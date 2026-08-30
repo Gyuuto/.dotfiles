@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defadvice c-lineup-arglist (around my activate)
   "Improve indentation of continued Java 8 lambda function opened as argument."
   (setq ad-return-value

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; nxhtml-mumamo-modeの設定
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

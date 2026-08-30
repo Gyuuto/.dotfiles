@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; scilab-mode
 ;; (global-font-lock-mode t)
 ;; (require 'scilab) ;(load "scilab")

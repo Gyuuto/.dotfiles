@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; C style
 (add-hook 'c-mode-hook
           (lambda()

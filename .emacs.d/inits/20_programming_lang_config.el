@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; 自動インデント機能
 (add-hook 'c-mode-common-hook
           (lambda ()

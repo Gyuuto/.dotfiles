@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; yatex-modeの設定
 (require 'yatex)
 ;; AMS-LaTeXを使う

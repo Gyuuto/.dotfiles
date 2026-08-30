@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;;; path
 (add-to-list 'exec-path (expand-file-name "'~/.cargo/bin'"))
 

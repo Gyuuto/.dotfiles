@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; 警告音を消す
 (setq visible-bell t)
 

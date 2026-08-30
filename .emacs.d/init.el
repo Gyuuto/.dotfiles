@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (setq system_path "~")
 
 ;; set default directory

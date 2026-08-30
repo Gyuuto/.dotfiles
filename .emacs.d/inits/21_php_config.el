@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; php style
 ;(load-library "php-mode")
 ;(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
