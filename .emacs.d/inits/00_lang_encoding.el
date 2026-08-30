@@ -18,24 +18,30 @@
 ;;(setq file-name-coding-system 'shift-jis)
 ;;(setq file-name-coding-system 'utf-8)
 ;;
+
 ;=======================================================================
 ;フォント
 ;=======================================================================
-;; (add-to-list 'default-frame-alist '(font . "rictydiminished-12"))
 
 (when (string= window-system "w32")
-  (if (find-font (font-spec :name "UDEV Gothic"))
+  (if (find-font (font-spec :name "UDEV Gothic JPDOC"))
+      ;; 【パターンA】UDEV Gothic がある場合
       (progn
-        (create-fontset-from-ascii-font "UDEV Gothic JPDOC-11:weight=normal:slant=normal" nil "myfont"))
+        ;; 1. 基本となるフォント（英数字・日本語）を設定
+        (add-to-list 'default-frame-alist '(font . "UDEV Gothic JPDOC-11"))
+        (set-frame-font "UDEV Gothic JPDOC-11" nil t)
+
+        ;; 2. Nerd Fonts 領域を「NF版」に割り当て
+        (set-fontset-font "fontset-default" '(#xE000 . #xF8FF) (font-spec :family "UDEV Gothic NF"))
+        (set-fontset-font "fontset-default" '(#xF0000 . #xFFFFD) (font-spec :family "UDEV Gothic NF"))
+
+        ;; 絵文字（emoji）スクリプト領域に Windows 標準の絵文字フォントを明示
+        (set-fontset-font "fontset-default" 'emoji (font-spec :family "Segoe UI Emoji")))
+
+    ;; 【パターンB】UDEV Gothic がない場合の保険
     (progn
-      (create-fontset-from-ascii-font "consolas-11:weight=normal:slant=normal" nil "myfont")
       (add-to-list 'default-frame-alist '(font . "Consolas-11"))
-
-      (set-fontset-font "fontset-myfont" 'japanese-jisx0208 "メイリオ-10:weight=normal:slant=normal" nil 'append)
-      (set-fontset-font "fontset-myfont" 'japanese-jisx0212 "メイリオ-10:weight=normal:slant=normal" nil 'append)
-      )
-    )
-
-  (add-to-list 'default-frame-alist '(font . "fontset-myfont"))
-)
-
+      (set-frame-font "Consolas-11" nil t)
+      (set-fontset-font "fontset-default" 'japanese-jisx0208 "メイリオ-10:weight=normal:slant=normal" nil 'append)
+      (set-fontset-font "fontset-default" 'japanese-jisx0212 "メイリオ-10:weight=normal:slant=normal" nil 'append)))
+  )
