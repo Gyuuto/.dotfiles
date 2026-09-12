@@ -25,25 +25,47 @@
 ;フォント
 ;=======================================================================
 
-(when (string= window-system "w32")
-  (if (find-font (font-spec :name "UDEV Gothic JPDOC"))
-      ;; 【パターンA】UDEV Gothic がある場合
+(when (eq window-system 'w32)
+  (if (find-font (font-spec :family "UDEV Gothic NF"))
+      ;; UDEV Gothic がある場合
       (progn
-        ;; 1. 基本となるフォント（英数字・日本語）を設定
-        (add-to-list 'default-frame-alist '(font . "UDEV Gothic JPDOC-11"))
-        (set-frame-font "UDEV Gothic JPDOC-11" nil t)
+        ;; 基本フォント
+        (add-to-list 'default-frame-alist
+                     '(font . "UDEV Gothic NF-10.5"))
+        (set-face-attribute 'default nil
+                            :family "UDEV Gothic NF"
+                            :height 120)
 
-        ;; 2. Nerd Fonts 領域を「NF版」に割り当て
-        (set-fontset-font "fontset-default" '(#xE000 . #xF8FF) (font-spec :family "UDEV Gothic NF"))
-        (set-fontset-font "fontset-default" '(#xF0000 . #xFFFFD) (font-spec :family "UDEV Gothic NF"))
+        ;; 絵文字
+        (set-fontset-font "fontset-default"
+                          'emoji
+                          (font-spec :family "Segoe UI Emoji" :height 105)))
 
-        ;; 絵文字（emoji）スクリプト領域に Windows 標準の絵文字フォントを明示
-        (set-fontset-font "fontset-default" 'emoji (font-spec :family "Segoe UI Emoji")))
-
-    ;; 【パターンB】UDEV Gothic がない場合の保険
+    ;; UDEV Gothic がない場合
     (progn
-      (add-to-list 'default-frame-alist '(font . "Consolas-11"))
-      (set-frame-font "Consolas-11" nil t)
-      (set-fontset-font "fontset-default" 'japanese-jisx0208 "メイリオ-10:weight=normal:slant=normal" nil 'append)
-      (set-fontset-font "fontset-default" 'japanese-jisx0212 "メイリオ-10:weight=normal:slant=normal" nil 'append)))
-  )
+      (add-to-list 'default-frame-alist
+                   '(font . "Consolas-10.5"))
+      (set-face-attribute 'default nil
+                          :family "Consolas"
+                          :height 105)
+      (set-fontset-font "fontset-default"
+                        'japanese-jisx0208
+                        (font-spec :family "メイリオ"
+                                   :height 105)
+                        nil 'append)
+      (set-fontset-font "fontset-default"
+                        'japanese-jisx0212
+                        (font-spec :family "メイリオ"
+                                   :height 105)
+                        nil 'append))))
+
+;; (when (eq window-system 'w32)
+;;   (when (find-font (font-spec :family "UDEV Gothic NF"))
+;;     (add-to-list 'default-frame-alist
+;;                  '(font . "UDEV Gothic NF-10.5"))
+;;     (set-frame-font "UDEV Gothic NF-10.5" nil t)
+
+;;     ;; 絵文字
+;;     (set-fontset-font "fontset-default"
+;;                       'emoji
+;;                       (font-spec :family "Segoe UI Emoji"))))
