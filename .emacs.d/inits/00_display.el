@@ -96,3 +96,9 @@
 (custom-set-faces
  '(header-line ((t (:inherit mode-line :background "color-29" :inverse-video nil :underline t))))
 )
+
+;; ;; 入力中の不要なフォント装飾処理をスキップする
+;; (setq redisplay-skip-fontification-on-input t)
+
+;; ;; スクロールの応答性を優先する
+;; (setq fast-but-imprecise-scrolling t)
