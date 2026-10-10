@@ -37,7 +37,7 @@
       :request-params '(:options (:num_ctx 16384))))
 
   (let* ((server my/llm-server-latest-coder))
-    (gptel-make-ollama "latest-coder"
+    (gptel-make-openai "latest-coder"
       :host (my/llm-server-host server)
       :stream t
       :models (my/llm-server-model server)
