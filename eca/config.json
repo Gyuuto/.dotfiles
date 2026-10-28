@@ -24,7 +24,7 @@
         },
         "web-fetch": {
             "description": "Fetches the content of a URL and returns it in Markdown format. Use this to read the full content of a page found via web-search.",
-            "command": "trafilatura --output-format=markdown -u \"{{url}}\"",
+            "command": "python3 -m trafilatura --output-format=markdown -u \"{{url}}\"",
             "schema": {
                 "properties": {
                     "url": {
