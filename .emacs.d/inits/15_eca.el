@@ -16,3 +16,7 @@
           (lambda ()
             (setq-local jit-lock-defer-time 0.5)
             (setq-local jit-lock-stealth-time nil)))
+
+(with-eval-after-load 'eca-chat
+  (set-face-attribute 'eca-chat-option-value-face
+                      nil :foreground "#e0e0e0" :weight 'bold))
