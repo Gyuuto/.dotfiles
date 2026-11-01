@@ -47,6 +47,77 @@
                 },
                 "required": ["query"]
             }
+        },
+        "read-image": {
+            "description": "Reads an image file and sends it to the mmproj-enabled LLM currently loaded on the llama.cpp server for analysis (thinking is disabled via chat_template_kwargs, so the model answers directly and briefly). Returns the model's description/answer about the image content. How to ask: phrase questions NEUTRALLY — ask the model to describe what is visible ('Describe the dog's pose'), not leading binary-choice options ('squatting or leg raised?'), because the offered option biases the answer (binary-choice bias observed empirically). Ask one fact per question and request one short sentence per item.",
+            "command": "python3 \"C:/Users/Yuto Inoue/.config/eca/tools/read_image.py\" \"{{path}}\" \"{{prompt}}\"",
+            "schema": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "Absolute path to the image file (png, jpg, jpeg, bmp, webp)."
+                    },
+                    "prompt": {
+                        "type": "string",
+                        "description": "Question or instruction about the image. Phrase it neutrally (describe what is visible), avoid binary-choice options; one fact per question, one short sentence per item (e.g., 'Describe the dog's pose')."
+                    }
+                },
+                "required": ["path", "prompt"]
+            }
+        },
+        "danbooru-tags": {
+            "description": "Analyzes Danbooru (danbooru.donmai.us) posts.json for a given tag and reports which tags co-occur in real posts. It fetches SFW posts only (rating=safe), ranked by score (order=score), and prints a Markdown report: a Summary (population, sampling mode, distinct-tag counts per category), ranked tables of co-occurring General / Character / Copyright / Meta tags with frequency, and an optional verification section for candidate tags (verdict ADOPT / MODERATE / RARE / ABSENT per candidate). Use this to confirm whether a Danbooru tag actually exists and what vocabulary surrounds a character/work tag, when building an accurate anime image-generation prompt (it is a reliable substitute for the flaky tags/<name>.json show endpoint). How to interpret the output: (1) ADOPT identity tags with high frequency — character-specific appearance/costume tags (e.g. a forehead jewel, hair tubes, eye-of-horus for Ishizu Ishtar) anchor the character reliably. (2) Be judgmental about high-frequency body/revealing tags (breasts, cleavage, skirt_lift, ...): because sampling favors the most-rated SFW fanart, they may not fit the outfit/pose you are targeting — include only if it matches your intended design. (3) Ignore artist and meta tags — they should not appear in a character prompt. (4) If the report warns about a small sample (<10 posts) or reports 'sample of top-N', treat the frequencies as low-confidence. Caveats: SFW posts only (R18 analysis is out of scope); `tag` must be a single canonical Danbooru tag — underscore form preferred (space-form multi-word tags are auto-normalized to underscores); if the tag does not exist the report states TAG NOT FOUND explicitly. It also supports a sampling-independent tag-existence check: pass comma-separated exact tag names to `check` (use an empty `tag` and `limit` for a check-only run; `limit`/`verify` are ignored then). Each name is probed via posts.json?tags=<name>&limit=1 and reported as EXISTS (the name is a real canonical tag carried by posts), ALIAS (the name resolves to real posts but the posts use a different canonical name; candidate canonical names are listed), or NOT FOUND (no posts match the name; it most likely does not exist — express it in natural language or try a variant). Use `check` to settle exact spellings and catch invented tags: unlike `verify` (which measures co-occurrence inside a sampled SFW post set and can read ABSENT for real NSFW-centric tags such as ahegao/masturbation/pussy_juice), `check` is dictionary-level and sampling-independent.",
+            "command": "python3 \"C:/Users/Yuto Inoue/.config/eca/tools/danbooru_tags.py\" \"{{tag}}\" --limit \"{{limit}}\" --verify \"{{verify}}\" --check \"{{check}}\"",
+            "schema": {
+                "properties": {
+                    "tag": {
+                        "type": "string",
+                        "description": "The single Danbooru tag to analyze (a character tag like 'ishizu_ishtar', a work tag like 'yu-gi-oh!', or a general tag). Underscore form is preferred; space-form multi-word tags are auto-normalized to underscores. Do not pass multiple tags. Pass an empty string when you only want the tag-existence check via `check`."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Number of SFW posts to sample, 1-200 (Danbooru caps at 200). 50 is a good default for a balance of coverage and speed; 200 gives the fullest census for popular tags. Ignored in check-only runs (empty `tag`)."
+                    },
+                    "verify": {
+                        "type": "string",
+                        "description": "Comma-separated list of candidate tags whose exact usage you want to verify (each is resolved against the sampled posts and given an ADOPT/MODERATE/RARE/ABSENT verdict; space-form names are auto-normalized). Pass an empty string if you do not need the verification section."
+                    },
+                    "check": {
+                        "type": "string",
+                        "description": "Comma-separated list of exact tag names to existence-check (each is probed dictionary-level via posts.json and given an EXISTS/ALIAS/NOT FOUND verdict; space-form names are auto-normalized). Use an empty `tag` for a check-only run. Pass an empty string if you do not need the existence-check section."
+                    }
+                },
+                "required": ["tag", "limit", "verify", "check"]
+            }
+        },
+        "pdf-extract": {
+            "description": "Extracts text from a PDF file (pypdf-based). For PDFs web-fetch cannot parse (trafilatura returns no content for PDFs). Accepts a local absolute path OR an http(s) URL — URLs are downloaded once into %TEMP%/eca-pdf and cached, so research agents can read a paper PDF directly from a search result. Three output modes: mode=lines with a regex pattern returns matching lines with page markers and context; mode=text returns the extracted text with page markers (use to read a whole short paper); mode=raw returns text without markers. Defaults: pattern empty + mode=text reads the whole document; pattern given + mode=lines (default mode) searches; max_matches default 60 (cap 500); context_chars default 240 (40-2000). At most 400 pages are read. Errors are explicit: 'not a PDF file' (the URL served HTML — typical of paywalled publishers blocking non-browser clients, or the link is an abstract page), 'PDF is encrypted' (needs --password via CLI), 'needs the cryptography package' (AES-encrypted), 'no extractable text ... needs OCR' (scanned image PDF), 'pypdf is not installed'. Matched text is returned verbatim with page numbers — quote from it without reformatting formulas. Spec: tools/pdf_extract.md; tests: tools/tests/test_pdf_extract.py.",
+            "command": "python3 \"C:/Users/Yuto Inoue/.config/eca/tools/pdf_extract.py\" \"{{path}}\" --pattern \"{{pattern}}\" --mode \"{{mode}}\" --max-matches \"{{max_matches}}\" --context-chars \"{{context_chars}}\"",
+            "schema": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "Absolute path to the PDF file, or an http(s) URL of a PDF (downloaded and cached automatically)."
+                    },
+                    "pattern": {
+                        "type": "string",
+                        "description": "Regex searched line by line, case-insensitive (e.g. 'surface tension|curvature'). Empty string = no search."
+                    },
+                    "mode": {
+                        "type": "string",
+                        "description": "lines (matching lines with page markers), text (whole document, page markers), or raw (whole document, no markers). Empty string = lines when a pattern is given, text otherwise."
+                    },
+                    "max_matches": {
+                        "type": "integer",
+                        "description": "Maximum matches to report (default 60, cap 500). Ignored outside lines mode."
+                    },
+                    "context_chars": {
+                        "type": "integer",
+                        "description": "Characters of context on each side of a match (default 240, range 40-2000). Ignored outside lines mode."
+                    }
+                },
+                "required": ["path"]
+            }
         }
     },
     "toolCall": {
@@ -87,7 +158,8 @@
     },
     "defaultAgent": "code",
     "welcomeMessage" : "Welcome to ECA!\n\nType '/' for commands\n\n",
-    "autoCompactPercentage": 85,
+    "autoCompactPercentage": 75,
+    "autoCompactTokensLeft": 65536,
     "index" : {
         "ignoreFiles" : [ {
             "type" : "gitignore"
