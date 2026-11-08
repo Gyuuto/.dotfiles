@@ -118,6 +118,30 @@
                 },
                 "required": ["path"]
             }
+        },
+        "tagger": {
+            "description": "Tags anime images with danbooru tags using the local SmilingWolf/wd-eva02-large-tagger-v3 model (tools/tagger.py + tools/models/model.safetensors, CPU inference via torch/timm — this is a tag *classifier*, not a vision-language model: it cannot answer questions about an image, use read-image for that). Accepts one or more absolute image paths as SEPARATE space-separated tokens (jpg jpeg png bmp webp tga; a directory token expands to the images inside it, and overlapping tokens are de-duplicated) and runs them as one batch. Prefer plain file/directory tokens; use a glob token only when nothing else is passed, because the script resolves glob tokens relative to the current directory, so mixing a glob with other tokens or pointing one at another drive can fail with NotImplementedError (Non-relative patterns are unsupported). Returns stdout JSON only: {\"images\": [{\"file\": \"<path>\", \"tags\": [{\"tag\": \"1girl\", \"score\": 0.98}, ...]}]} with tags sorted by score descending, scores rounded to 4 decimals, and rating/character/general merged into one flat list (rating tags general/sensitive/questionable/explicit are always present in the output; for a real anime image the rating is general = safe). Typical anime photos yield roughly 10-40 tags above 0.35. All three arguments are required: use threshold 0.35 and limit 20 as the typical values (raise threshold for a short high-confidence list, lower it for a fuller vocabulary dump; limit 0 = unlimited). Model/CSV paths are resolved inside the script (TAGGER_MODEL/TAGGER_TAGS -> tools/models/), so they are not exposed here. Errors are returned with a non-zero exit and a JSON message {\"error\": ..., \"details\": ...} on stderr (common ones: 対象の画像が見つかりませんでした = the paths matched nothing, 一部の画像ファイルが存在しません = a typo'd or missing path, モデルファイルが見つかりません / tag 一覧 CSV が見つかりません = tools/models/ files missing, モデル出力サイズと tag 一覧の行数が一致しません = model and selected_tags.csv are not a matching pair). Spec: tools/tagger.md; a single inference pass takes on the order of tens of seconds on CPU.",
+            "command": "python C:/Users/yuto.inoue/.config/eca/tools/tagger.py {{images}} --threshold \"{{threshold}}\" --limit \"{{limit}}\"",
+            "schema": {
+                "properties": {
+                    "images": {
+                        "type": "string",
+                        "description": "Absolute image file or directory paths as separate tokens joined by single spaces (e.g. 'C:/img/a.png C:/imgs C:/other/b.jpg'). A directory token expands to the images it contains, and tokens that overlap are de-duplicated. Do NOT wrap the whole list in one pair of quotes and do not use paths containing spaces — a single quoted multi-path string reaches the script as one argument. Glob tokens (* ? [) are resolved against the current working directory, so pass a glob only on its own; mixing a glob with plain tokens or pointing one at a different drive can raise NotImplementedError (Non-relative patterns are unsupported). An empty value returns the error 対象の画像が見つかりませんでした with no output; a non-existent plain path returns 一部の画像ファイルが存在しません with details.missing."
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1,
+                        "description": "Minimum tag score to report, 0-1. Required; use 0.35 as the typical value (the script's own default) — it yields a usable tag list for most anime images. Raise it (0.5-0.7) for a short high-confidence list, lower it (0.1-0.25) for a fuller vocabulary dump."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Max tags returned per image. Required; use 20 as the typical value (the script's own default). 0 = unlimited (returns every tag above threshold), 10 caps to the most confident tags only."
+                    }
+                },
+                "required": ["images", "threshold", "limit"]
+            }
         }
     },
     "toolCall": {
